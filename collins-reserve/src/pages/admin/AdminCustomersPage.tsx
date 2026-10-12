@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowDown, ArrowUp, Info, Users } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -173,7 +173,7 @@ export default function AdminCustomersPage() {
 
       <Card className="mb-6">
         <div className="flex items-start gap-3">
-          <Info className="mt-0.5 size-4 shrink-0 text-champagne" aria-hidden />
+          <Info className="mt-0.5 size-4 shrink-0 text-champagne-text" aria-hidden />
           <p className="text-support text-stone">
             Derived from recorded orders. Customer records are not stored separately in this demo.
           </p>

@@ -92,15 +92,41 @@ export interface DrawerProps {
 }
 
 export function Drawer({ open, onClose, title, children }: DrawerProps) {
+  const panelRef = useRef<HTMLElement>(null)
+
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
     document.addEventListener('keydown', onKey)
     const overflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    requestAnimationFrame(() => {
+      panelRef.current?.querySelector<HTMLElement>('button, [href], input, select, textarea')?.focus()
+    })
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = overflow
+      previouslyFocused?.focus?.()
     }
   }, [open, onClose])
 
@@ -109,7 +135,10 @@ export function Drawer({ open, onClose, title, children }: DrawerProps) {
   return (
     <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label={title}>
       <button type="button" aria-label="Close panel" className="absolute inset-0 bg-ink/40" onClick={onClose} />
-      <aside className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-ivory shadow-modal">
+      <aside
+        ref={panelRef}
+        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-ivory shadow-modal"
+      >
         <div className="flex items-center justify-between border-b border-line px-6 py-5">
           <h2 className="text-card">{title}</h2>
           <button

@@ -76,11 +76,31 @@ export function RestaurantDataProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
+    let first = true
+    const settle = () => {
+      if (first) {
+        first = false
+        setLoading(false)
+      }
+    }
     const unsubs = [
-      subscribeToRestaurant(setRestaurant, setError),
-      subscribeToSettings(setSettings, setError),
+      subscribeToRestaurant(
+        (value) => {
+          setRestaurant(value)
+          settle()
+        },
+        setError,
+      ),
+      subscribeToSettings(
+        (value) => {
+          setSettings(value)
+          settle()
+        },
+        setError,
+      ),
     ]
-    const t = window.setTimeout(() => setLoading(false), 800)
+    /* Fallback so the UI never hangs on a silent listener failure. */
+    const t = window.setTimeout(settle, 2500)
     return () => {
       unsubs.forEach((u) => u())
       window.clearTimeout(t)

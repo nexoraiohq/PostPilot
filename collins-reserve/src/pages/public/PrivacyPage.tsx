@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function PrivacyPage() {
   return (
@@ -7,7 +7,7 @@ export default function PrivacyPage() {
         <header>
           <p className="label-caps mb-5 text-stone">
             Legal
-            <span className="mx-3 text-champagne">·</span>
+            <span className="mx-3 text-champagne-text">·</span>
             Privacy
           </p>
           <h1 className="text-page">Privacy policy</h1>
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             <h2 className="border-t border-line pt-6 text-card">2. Information we collect</h2>
             <div className="mt-4 space-y-4 text-body text-ink/80">
               <p>Information you give to us directly would include:</p>
-              <ul className="list-disc space-y-2 pl-5 marker:text-champagne">
+              <ul className="list-disc space-y-2 pl-5 marker:text-champagne-text">
                 <li>
                   <span className="font-medium text-ink">Reservation details</span> — your name, phone number, email
                   address, date and time of booking, party size, seating preference and any notes you add.

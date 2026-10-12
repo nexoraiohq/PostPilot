@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function TermsPage() {
   return (
@@ -7,7 +7,7 @@ export default function TermsPage() {
         <header>
           <p className="label-caps mb-5 text-stone">
             Legal
-            <span className="mx-3 text-champagne">·</span>
+            <span className="mx-3 text-champagne-text">·</span>
             Terms
           </p>
           <h1 className="text-page">Terms of use</h1>
@@ -87,7 +87,7 @@ export default function TermsPage() {
             <h2 className="border-t border-line pt-6 text-card">5. Acceptable use</h2>
             <div className="mt-4 space-y-4 text-body text-ink/80">
               <p>You agree not to misuse the site. In particular, you will not:</p>
-              <ul className="list-disc space-y-2 pl-5 marker:text-champagne">
+              <ul className="list-disc space-y-2 pl-5 marker:text-champagne-text">
                 <li>use automated tools to scrape menu, pricing or availability data at volume;</li>
                 <li>submit false or unlawful content through the forms, or impersonate another person;</li>
                 <li>attempt to probe, disrupt or gain unauthorised access to the site or its data;</li>

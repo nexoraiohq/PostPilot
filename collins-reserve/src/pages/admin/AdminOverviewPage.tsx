@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, CalendarDays, ClipboardList, RefreshCw, TrendingUp } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
@@ -217,7 +217,7 @@ export default function AdminOverviewPage() {
                 <p className="label-caps text-stone">Top selling dishes</p>
                 <p className="mt-2 text-support text-stone">Quantities across all recorded orders</p>
               </div>
-              <TrendingUp className="size-4 text-champagne" aria-hidden />
+              <TrendingUp className="size-4 text-champagne-text" aria-hidden />
             </div>
             <ul className="mt-5 space-y-3">
               {stats.dishes.map((dish) => (

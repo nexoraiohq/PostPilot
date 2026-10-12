@@ -1,4 +1,4 @@
-﻿import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { LinkButton } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
 
@@ -32,7 +32,7 @@ function Band({ eyebrow, title, image, alt, reverse = false, children }: BandPro
           </div>
         </div>
         <div className={cn('lg:col-span-6', reverse ? 'lg:order-1' : 'lg:order-2')}>
-          <p className="label-caps mb-4 text-champagne">{eyebrow}</p>
+          <p className="label-caps mb-4 text-champagne-text">{eyebrow}</p>
           <h2 className="text-section max-w-xl">{title}</h2>
           <div className="mt-6 max-w-xl space-y-4 text-body text-stone">{children}</div>
         </div>
@@ -59,14 +59,14 @@ export default function StoryPage() {
       <section aria-label="Our story" className="editorial-width pt-12 md:pt-16 lg:pt-20">
         <p className="label-caps mb-6 text-stone">
           Our story
-          <span className="mx-3 text-champagne">·</span>
+          <span className="mx-3 text-champagne-text">·</span>
           Maison Noir
         </p>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h1 className="text-page max-w-3xl">
             The long way
             <br />
-            to the table<span className="text-champagne">.</span>
+            to the table<span className="text-champagne-text">.</span>
           </h1>
           <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             A small dining room in Kilimani, cooking what the season gives us and giving every table time.
@@ -143,7 +143,7 @@ export default function StoryPage() {
       <section aria-label="Hospitality" className="editorial-width section-y">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <p className="label-caps mb-4 text-champagne">Hospitality</p>
+            <p className="label-caps mb-4 text-champagne-text">Hospitality</p>
             <h2 className="text-section">Service that reads the table.</h2>
           </div>
           <div className="space-y-4 text-body text-stone lg:col-span-7 lg:col-start-6">
@@ -164,7 +164,7 @@ export default function StoryPage() {
       {/* 06 — Continue */}
       <section aria-label="Continue" className="border-t border-line">
         <div className="editorial-width section-y text-center">
-          <p className="label-caps mb-4 text-champagne">Next</p>
+          <p className="label-caps mb-4 text-champagne-text">Next</p>
           <h2 className="mx-auto max-w-2xl text-section">
             Read the menu, or take a seat at one.
           </h2>

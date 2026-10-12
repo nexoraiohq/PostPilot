@@ -1,4 +1,4 @@
-﻿import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { LinkButton } from '@/components/ui/Button'
 
 export default function NotFoundPage() {
@@ -7,7 +7,7 @@ export default function NotFoundPage() {
       aria-label="Page not found"
       className="editorial-width flex min-h-[65dvh] flex-col items-center justify-center py-20 text-center md:py-28"
     >
-      <p className="text-hero text-champagne" aria-hidden>
+      <p className="text-hero text-champagne-text" aria-hidden>
         404
       </p>
       <h1 className="mt-8 text-section">This table doesn&apos;t exist.</h1>

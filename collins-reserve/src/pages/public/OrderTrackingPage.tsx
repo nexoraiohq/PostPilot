@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowUpRight, Check, CreditCard, Mail, Phone, Receipt, Store, TriangleAlert, Truck } from 'lucide-react'
 import { subscribeToOrder } from '@/services/orders.service'
@@ -208,7 +208,7 @@ export default function OrderTrackingPage() {
   return (
     <section className="editorial-width pt-10 pb-16 md:pt-14">
       {/* Reference header */}
-      <p className="label-caps text-champagne">Order tracking</p>
+      <p className="label-caps text-champagne-text">Order tracking</p>
       <div className="mt-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
         <div>
           <h1 className="text-kpi tabular-nums">{order.reference}</h1>
@@ -293,9 +293,9 @@ export default function OrderTrackingPage() {
           <div className="rounded-2xl border border-line bg-paper p-6">
             <div className="flex items-center gap-2.5">
               {isDelivery ? (
-                <Truck className="size-5 text-champagne" aria-hidden />
+                <Truck className="size-5 text-champagne-text" aria-hidden />
               ) : (
-                <Store className="size-5 text-champagne" aria-hidden />
+                <Store className="size-5 text-champagne-text" aria-hidden />
               )}
               <h2 className="text-card">{isDelivery ? 'Delivery' : 'Pickup'}</h2>
             </div>
@@ -409,7 +409,7 @@ export default function OrderTrackingPage() {
               </div>
             </dl>
             <div className="mt-4 flex items-start gap-2 border-t border-line pt-4 text-support text-stone">
-              <CreditCard className="mt-0.5 size-4 shrink-0 text-champagne" aria-hidden />
+              <CreditCard className="mt-0.5 size-4 shrink-0 text-champagne-text" aria-hidden />
               <span>{paymentLabel(order.paymentMethod)}</span>
             </div>
           </div>
@@ -422,11 +422,11 @@ export default function OrderTrackingPage() {
             </p>
             <div className="mt-4 flex flex-col gap-2.5 text-[15px]">
               <a href={phoneHref} className="flex items-center gap-2.5 hover:underline">
-                <Phone className="size-4 shrink-0 text-champagne" aria-hidden />
+                <Phone className="size-4 shrink-0 text-champagne-text" aria-hidden />
                 {restaurant?.phone ?? '+254 700 512 846'}
               </a>
               <a href={emailHref} className="flex items-center gap-2.5 hover:underline">
-                <Mail className="size-4 shrink-0 text-champagne" aria-hidden />
+                <Mail className="size-4 shrink-0 text-champagne-text" aria-hidden />
                 {restaurant?.email ?? 'hello@maisonnoir.demo'}
               </a>
             </div>

@@ -7,7 +7,7 @@ const tones: Record<Tone, string> = {
   neutral: 'bg-line/60 text-stone',
   success: 'bg-success-soft text-success',
   error: 'bg-error-soft text-error',
-  champagne: 'bg-champagne-soft/70 text-[#8a6f42]',
+  champagne: 'bg-champagne-soft/70 text-champagne-text',
   ink: 'bg-ink text-ivory',
   info: 'bg-[#e9eef5] text-[#33506e]',
 }

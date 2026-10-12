@@ -1,8 +1,9 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
 import { subscribeToExperiences } from '@/services/restaurant.service'
 import { useMenuData, useRestaurantData } from '@/hooks/data'
+import { imgSrcSet, warmCommonRoutes } from '@/app/prefetch'
 import { formatKes, todayInTimezone } from '@/utils/format'
 import { Badge } from '@/components/ui/Badge'
 import { LinkButton, buttonStyles } from '@/components/ui/Button'
@@ -27,7 +28,7 @@ function SectionHeading({ eyebrow, title, action }: { eyebrow: string; title: st
   return (
     <div className="mb-10 flex flex-wrap items-end justify-between gap-4 md:mb-14">
       <div>
-        <p className="label-caps mb-3 text-champagne">{eyebrow}</p>
+        <p className="label-caps mb-3 text-champagne-text">{eyebrow}</p>
         <h2 className="text-section max-w-2xl">{title}</h2>
       </div>
       {action}
@@ -44,6 +45,7 @@ export default function HomePage() {
   const [date, setDate] = useState(() => todayInTimezone())
 
   useEffect(() => subscribeToExperiences(setExperiences), [])
+  useEffect(() => warmCommonRoutes(), [])
 
   const signatures = featured.slice(0, 4)
   const todayHours = settings?.openingHours.find((h) => h.day === TODAY_WEEKDAY)
@@ -60,13 +62,13 @@ export default function HomePage() {
       <section aria-label="Introduction" className="editorial-width pt-12 md:pt-16 lg:pt-20">
         <p className="label-caps mb-6 text-stone">
           Nairobi · Kenya
-          <span className="mx-3 text-champagne">·</span>
+          <span className="mx-3 text-champagne-text">·</span>
           Est. 2026
         </p>
         <h1 className="text-hero">
           A slower kind
           <br />
-          of dining<span className="text-champagne">.</span>
+          of dining<span className="text-champagne-text">.</span>
         </h1>
         <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
           <p className="max-w-2xl text-lead text-stone">
@@ -85,6 +87,8 @@ export default function HomePage() {
         <div className="relative mt-10 overflow-hidden rounded-2xl bg-line/40 md:mt-14 md:rounded-3xl">
           <img
             src={HERO_IMAGE}
+            srcSet={imgSrcSet(HERO_IMAGE, [800, 1200, 1600, 2000])}
+            sizes="(width >= 80rem) 75rem, 100vw"
             alt="The MAISON NOIR dining room set for evening service, with soft light over linen-dressed tables"
             className="aspect-[4/5] w-full object-cover sm:aspect-[16/10] lg:aspect-[21/9]"
             fetchPriority="high"
@@ -182,6 +186,8 @@ export default function HomePage() {
             <div className="overflow-hidden rounded-2xl bg-line/40 lg:rounded-3xl">
               <img
                 src={STORY_IMAGE}
+                srcSet={imgSrcSet(STORY_IMAGE, [600, 900, 1400])}
+                sizes="(width >= 64rem) 37.5rem, 100vw"
                 alt="Morning light in the MAISON NOIR dining room, with the bar and open kitchen beyond"
                 loading="lazy"
                 width={1400}
@@ -191,7 +197,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-7">
-            <p className="label-caps mb-4 text-champagne">The restaurant</p>
+            <p className="label-caps mb-4 text-champagne-text">The restaurant</p>
             <h2 className="text-section max-w-xl">
               A small dining room built around one idea: cook what the season gives us.
             </h2>
@@ -339,7 +345,7 @@ export default function HomePage() {
         <SectionHeading eyebrow="Visit us" title="Find us in Kilimani" />
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded-2xl border border-line bg-paper p-7">
-            <MapPin className="size-5 text-champagne" aria-hidden />
+            <MapPin className="size-5 text-champagne-text" aria-hidden />
             <h3 className="mt-4 text-card">Address</h3>
             <address className="mt-3 space-y-0.5 text-support text-stone not-italic">
               {(restaurant?.addressLines ?? ['12 Riverside Lane', 'Kilimani']).map((l) => (
@@ -370,7 +376,7 @@ export default function HomePage() {
           </div>
 
           <div className="rounded-2xl border border-line bg-paper p-7">
-            <Clock className="size-5 text-champagne" aria-hidden />
+            <Clock className="size-5 text-champagne-text" aria-hidden />
             <h3 className="mt-4 text-card">Opening hours</h3>
             <ul className="mt-3 space-y-1.5">
               {(settings?.openingHours ?? []).map((h) => (
@@ -386,7 +392,7 @@ export default function HomePage() {
           </div>
 
           <div className="rounded-2xl border border-line bg-paper p-7">
-            <Phone className="size-5 text-champagne" aria-hidden />
+            <Phone className="size-5 text-champagne-text" aria-hidden />
             <h3 className="mt-4 text-card">Contact</h3>
             <div className="mt-3 space-y-2 text-support">
               <p>

@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -63,14 +63,14 @@ export default function ContactPage() {
       <section aria-label="Contact and visit" className="editorial-width pt-12 md:pt-16 lg:pt-20">
         <p className="label-caps mb-6 text-stone">
           Contact &amp; visit
-          <span className="mx-3 text-champagne">·</span>
+          <span className="mx-3 text-champagne-text">·</span>
           Kilimani, Nairobi
         </p>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h1 className="text-page max-w-3xl">
             Come and
             <br />
-            find us<span className="text-champagne">.</span>
+            find us<span className="text-champagne-text">.</span>
           </h1>
           <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             Address, hours and the fastest ways to reach the team — or send a message and we will come back to you.
@@ -83,7 +83,7 @@ export default function ContactPage() {
           {/* Left — visit details */}
           <div className="space-y-6 lg:col-span-5">
             <div className="rounded-2xl border border-line bg-paper p-7">
-              <MapPin className="size-5 text-champagne" aria-hidden />
+              <MapPin className="size-5 text-champagne-text" aria-hidden />
               <h2 className="mt-4 text-card">Find us</h2>
               <address className="mt-3 space-y-0.5 text-support text-stone not-italic">
                 {(restaurant?.addressLines ?? ['12 Riverside Lane', 'Kilimani']).map((line) => (
@@ -108,7 +108,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-line bg-paper p-7">
-              <Clock className="size-5 text-champagne" aria-hidden />
+              <Clock className="size-5 text-champagne-text" aria-hidden />
               <h2 className="mt-4 text-card">Opening hours</h2>
               <ul className="mt-3 space-y-1.5">
                 {hours.map((h) => (
@@ -130,7 +130,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-line bg-paper p-7">
-              <Phone className="size-5 text-champagne" aria-hidden />
+              <Phone className="size-5 text-champagne-text" aria-hidden />
               <h2 className="mt-4 text-card">Talk to us</h2>
               <div className="mt-3 space-y-1">
                 <p>
@@ -158,7 +158,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-line bg-paper p-7">
-              <Accessibility className="size-5 text-champagne" aria-hidden />
+              <Accessibility className="size-5 text-champagne-text" aria-hidden />
               <h2 className="mt-4 text-card">Accessibility</h2>
               <ul className="mt-3 space-y-2 text-support text-stone">
                 <li>Step-free entrance from the pavement, with a portable ramp available on request.</li>

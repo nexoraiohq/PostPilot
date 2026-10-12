@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowUpRight, Check } from 'lucide-react'
 import { subscribeToExperiences } from '@/services/restaurant.service'
 import { LinkButton } from '@/components/ui/Button'
@@ -24,7 +24,7 @@ function ExperienceRow({ experience, index }: { experience: DiningExperience; in
         </div>
       </div>
       <div className={cn('lg:col-span-6', reversed ? 'lg:order-1' : 'lg:order-2')}>
-        <p className="label-caps mb-4 text-champagne">Experience {String(index + 1).padStart(2, '0')}</p>
+        <p className="label-caps mb-4 text-champagne-text">Experience {String(index + 1).padStart(2, '0')}</p>
         <h2 className="text-section max-w-xl">{experience.name}</h2>
         <p className="mt-5 max-w-xl text-lead text-stone">{experience.description}</p>
 
@@ -32,7 +32,7 @@ function ExperienceRow({ experience, index }: { experience: DiningExperience; in
           <ul className="mt-6 max-w-xl space-y-2.5">
             {experience.highlights.map((highlight) => (
               <li key={highlight} className="flex items-start gap-3 text-support text-ink/75">
-                <Check className="mt-0.5 size-4 shrink-0 text-champagne" aria-hidden />
+                <Check className="mt-0.5 size-4 shrink-0 text-champagne-text" aria-hidden />
                 <span>{highlight}</span>
               </li>
             ))}
@@ -93,14 +93,14 @@ export default function ExperiencesPage() {
       <section aria-label="Experiences" className="editorial-width pt-12 md:pt-16 lg:pt-20">
         <p className="label-caps mb-6 text-stone">
           Experiences
-          <span className="mx-3 text-champagne">·</span>
+          <span className="mx-3 text-champagne-text">·</span>
           Beyond à la carte
         </p>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h1 className="text-page max-w-3xl">
             Ways to dine,
             <br />
-            made for the occasion<span className="text-champagne">.</span>
+            made for the occasion<span className="text-champagne-text">.</span>
           </h1>
           <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             Private tastings, long-table suppers and chef&apos;s counters — each one bookable, each one a little
@@ -142,7 +142,7 @@ export default function ExperiencesPage() {
         <div className="editorial-width section-y">
           <div className="flex flex-col gap-6 rounded-3xl border border-line bg-paper p-7 md:flex-row md:items-center md:justify-between md:p-10">
             <div>
-              <p className="label-caps mb-3 text-champagne">Something bespoke</p>
+              <p className="label-caps mb-3 text-champagne-text">Something bespoke</p>
               <h2 className="text-section max-w-lg">Planning a private evening or an event?</h2>
               <p className="mt-3 max-w-md text-support text-stone">
                 Tell us the date, the occasion and roughly how many seats you need — we will come back with ideas,

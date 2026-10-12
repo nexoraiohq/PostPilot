@@ -1,9 +1,10 @@
-﻿import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Clock, Plus, Search, TriangleAlert, X } from 'lucide-react'
 import { useMenuData, useRestaurantData } from '@/hooks/data'
 import { useCart } from '@/context/cart'
 import { useToast } from '@/context/toast'
+import { imgSrcSet } from '@/app/prefetch'
 import { MAX_ORDER_LINES } from '@/services/orders.service'
 import { DIETARY_LABELS, type MenuItem, type RestaurantSettings } from '@/types'
 import { formatKes } from '@/utils/format'
@@ -66,6 +67,8 @@ function DishCard({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
           <img
             ref={imgRef}
             src={item.imageUrl}
+            srcSet={imgSrcSet(item.imageUrl, [400, 600, 900])}
+            sizes="(width >= 80rem) 23rem, (width >= 64rem) 30vw, (width >= 40rem) 45vw, 90vw"
             alt={item.name}
             loading="lazy"
             width={900}
@@ -112,6 +115,8 @@ function DishRow({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
           <img
             ref={imgRef}
             src={item.imageUrl}
+            srcSet={imgSrcSet(item.imageUrl, [160, 320])}
+            sizes="5rem"
             alt=""
             loading="lazy"
             width={160}
@@ -222,11 +227,11 @@ export default function MenuPage() {
     <>
       {/* Page header */}
       <section className="editorial-width pt-10 md:pt-14">
-        <p className="label-caps mb-5 text-champagne">À la carte</p>
+        <p className="label-caps mb-5 text-champagne-text">À la carte</p>
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
             <h1 className="text-page">
-              Menu<span className="text-champagne">.</span>
+              Menu<span className="text-champagne-text">.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lead text-stone">
               Written weekly from the market and cooked over charcoal and fire. Add dishes to your order for pickup or
@@ -234,7 +239,7 @@ export default function MenuPage() {
             </p>
           </div>
           <p className="flex shrink-0 items-center gap-2 text-support text-stone">
-            <Clock className="size-4 text-champagne" aria-hidden />
+            <Clock className="size-4 text-champagne-text" aria-hidden />
             {daysLabel ?? (settings === null && loading ? 'Loading service days…' : 'Service days to be confirmed')}
           </p>
         </div>

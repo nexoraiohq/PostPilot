@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -221,11 +221,11 @@ export default function ReservePage() {
 
   return (
     <section className="editorial-width pt-10 pb-16 md:pt-14">
-      <p className="label-caps mb-5 text-champagne">Reservations</p>
+      <p className="label-caps mb-5 text-champagne-text">Reservations</p>
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="text-page">
-            Reserve a table<span className="text-champagne">.</span>
+            Reserve a table<span className="text-champagne-text">.</span>
           </h1>
           <p className="mt-5 max-w-xl text-lead text-stone">
             Three short steps: your party and date, a seating time, then a few details. Every request is reviewed by our
@@ -272,7 +272,7 @@ export default function ReservePage() {
 
               <fieldset>
                 <legend className="flex items-center gap-2 text-[13px] font-medium text-ink">
-                  <Users className="size-4 text-champagne" aria-hidden />
+                  <Users className="size-4 text-champagne-text" aria-hidden />
                   Party size
                 </legend>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -332,7 +332,7 @@ export default function ReservePage() {
                 <div className="rounded-2xl border border-line bg-ivory px-5 py-4">
                   <p className="label-caps text-stone">That day</p>
                   <p className="mt-2 flex items-center gap-2 text-[15px]">
-                    <Clock className="size-4 shrink-0 text-champagne" aria-hidden />
+                    <Clock className="size-4 shrink-0 text-champagne-text" aria-hidden />
                     {settingsLoading && !settings ? (
                       <span className="block h-4 w-40 animate-pulse rounded bg-line/50" aria-hidden />
                     ) : (
@@ -620,7 +620,7 @@ export default function ReservePage() {
               <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-success-soft text-success">
                 <CircleCheckBig className="size-8" aria-hidden />
               </div>
-              <p className="label-caps mt-6 text-champagne">Request received</p>
+              <p className="label-caps mt-6 text-champagne-text">Request received</p>
               <h2 className="text-section mt-3">
                 Thank you, {booking.guestName.split(' ')[0] || booking.guestName}.
               </h2>

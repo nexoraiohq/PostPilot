@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu as MenuIcon, ShoppingBag, X } from 'lucide-react'
 import { useCart } from '@/context/cart'
 import { useRestaurantData } from '@/hooks/data'
 import { useLockBody, useScrolled } from '@/hooks/ui'
+import { prefetchRoute } from '@/app/prefetch'
 import { cn } from '@/utils/cn'
 import { formatTime12h } from '@/utils/format'
 import { LinkButton } from '@/components/ui/Button'
@@ -41,7 +42,8 @@ function AnnouncementStrip() {
   const message = 'Seasonal tasting menu now booking · Six courses · Thursday to Saturday evenings'
   return (
     <div className="relative bg-ink text-ivory">
-      <div className="flex h-9 items-center overflow-hidden">
+      <p className="sr-only">{message}</p>
+      <div className="flex h-9 items-center overflow-hidden" aria-hidden>
         <div className="flex w-max animate-marquee gap-16 pl-4">
           {Array.from({ length: 2 }).map((_, i) => (
             <span key={i} className="label-caps whitespace-nowrap text-champagne-soft/90">
@@ -70,10 +72,46 @@ function AnnouncementStrip() {
 export function SiteHeader() {
   const scrolled = useScrolled(32)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const mobileTriggerRef = useRef<HTMLButtonElement>(null)
+  const mobilePanelRef = useRef<HTMLDivElement>(null)
   const { itemCount, openCart } = useCart()
   const { settings } = useRestaurantData()
 
   useLockBody(mobileOpen)
+
+  /* Mobile menu is a modal dialog: trap focus, close on Escape, and
+     return focus to the trigger button when dismissed. */
+  useEffect(() => {
+    if (!mobileOpen) return
+    const panel = mobilePanelRef.current
+    const trigger = mobileTriggerRef.current
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false)
+        return
+      }
+      if (e.key !== 'Tab' || !panel) return
+      const focusable = panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    requestAnimationFrame(() => {
+      panel?.querySelector<HTMLElement>('button, a[href]')?.focus()
+    })
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      trigger?.focus()
+    }
+  }, [mobileOpen])
 
   return (
     <header className="sticky top-0 z-40">
@@ -100,6 +138,8 @@ export function SiteHeader() {
                 key={item.to}
                 to={item.to}
                 end={item.to === '/'}
+                onMouseEnter={() => prefetchRoute(item.to)}
+                onFocus={() => prefetchRoute(item.to)}
                 className={({ isActive }) =>
                   cn(
                     'relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.04em] transition-colors duration-200',
@@ -125,7 +165,7 @@ export function SiteHeader() {
               data-cart-target
               onClick={openCart}
               className="relative rounded-full p-2.5 text-ink transition-colors hover:bg-ink/5"
-              aria-label={`Open cart, ${itemCount} items`}
+              aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
             >
               <ShoppingBag className="size-[18px]" aria-hidden />
               {itemCount > 0 && (
@@ -134,13 +174,25 @@ export function SiteHeader() {
                 </span>
               )}
             </button>
-            <LinkButton to="/order" variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <LinkButton
+              to="/order"
+              variant="ghost"
+              size="sm"
+              className="hidden sm:inline-flex"
+              onMouseEnter={() => prefetchRoute('/order')}
+            >
               Order Online
             </LinkButton>
-            <LinkButton to="/reserve" size="sm" className="hidden sm:inline-flex">
+            <LinkButton
+              to="/reserve"
+              size="sm"
+              className="hidden sm:inline-flex"
+              onMouseEnter={() => prefetchRoute('/reserve')}
+            >
               Reserve a Table
             </LinkButton>
             <button
+              ref={mobileTriggerRef}
               type="button"
               className="rounded-full p-2.5 text-ink transition-colors hover:bg-ink/5 lg:hidden"
               aria-label="Open menu"
@@ -155,6 +207,7 @@ export function SiteHeader() {
 
       {mobileOpen && (
         <div
+          ref={mobilePanelRef}
           className="fixed inset-0 z-50 flex flex-col bg-ink text-ivory lg:hidden"
           role="dialog"
           aria-modal="true"
@@ -180,6 +233,7 @@ export function SiteHeader() {
                 key={item.to}
                 to={item.to}
                 end={item.to === '/'}
+                onMouseEnter={() => prefetchRoute(item.to)}
                 className={({ isActive }) =>
                   cn(
                     'font-display py-3 text-5xl font-semibold tracking-tight transition-colors',
@@ -209,7 +263,7 @@ export function SiteHeader() {
             </div>
           </nav>
           <div className="absolute inset-x-0 bottom-0 border-t border-white/10 px-6 py-4 text-center">
-            <p className="text-[12px] tracking-[0.14em] text-ivory/50 uppercase">
+            <p className="text-[12px] tracking-[0.14em] text-ivory/70 uppercase">
               {settings ? 'Nairobi · Kenya' : 'Nairobi · Kenya'}
             </p>
           </div>
@@ -232,7 +286,7 @@ export function SiteFooter() {
           <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-ivory/65">
             A slower kind of dining. Seasonal ingredients, thoughtful cooking, and an evening worth remembering.
           </p>
-          <p className="mt-8 text-[11px] leading-relaxed tracking-[0.08em] text-ivory/40 uppercase">
+          <p className="mt-8 text-[11px] leading-relaxed tracking-[0.08em] text-ivory/65 uppercase">
             Fictional restaurant · Demo experience
           </p>
         </div>
@@ -316,7 +370,7 @@ export function SiteFooter() {
             ).map((h) => (
               <li key={h.label} className="flex items-baseline justify-between gap-4">
                 <span>{h.label}</span>
-                <span className="tabular-nums text-ivory/50">
+                <span className="tabular-nums text-ivory/70">
                   {h.closed ? 'Closed' : `${formatTime12h(h.open)} – ${formatTime12h(h.close)}`}
                 </span>
               </li>
@@ -326,7 +380,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="editorial-width flex flex-col items-center justify-between gap-3 py-6 text-[12px] tracking-[0.06em] text-ivory/45 sm:flex-row">
+        <div className="editorial-width flex flex-col items-center justify-between gap-3 py-6 text-[12px] tracking-[0.06em] text-ivory/65 sm:flex-row">
           <p>© {SITE_YEAR} MAISON NOIR — fictional demo restaurant.</p>
           <div className="flex items-center gap-5">
             <Link to="/privacy" className="hover:text-ivory/80">Privacy</Link>

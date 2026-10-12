@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useRestaurantData } from '@/hooks/data'
 
 export default function CancellationPage() {
@@ -10,7 +10,7 @@ export default function CancellationPage() {
         <header>
           <p className="label-caps mb-5 text-stone">
             Legal
-            <span className="mx-3 text-champagne">·</span>
+            <span className="mx-3 text-champagne-text">·</span>
             Reservations &amp; orders
           </p>
           <h1 className="text-page">Cancellation policy</h1>
@@ -35,7 +35,7 @@ export default function CancellationPage() {
               </p>
               {settings?.cancellationPolicy && (
                 <blockquote className="rounded-2xl border border-line bg-paper p-5">
-                  <p className="label-caps mb-2 text-champagne">Current policy on file</p>
+                  <p className="label-caps mb-2 text-champagne-text">Current policy on file</p>
                   <p className="text-support text-stone">{settings.cancellationPolicy}</p>
                 </blockquote>
               )}

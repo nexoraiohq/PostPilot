@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -170,7 +170,7 @@ export default function OrderPage() {
           <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-success-soft text-success">
             <Check className="size-8" aria-hidden />
           </div>
-          <p className="label-caps mt-6 text-champagne">Order placed</p>
+          <p className="label-caps mt-6 text-champagne-text">Order placed</p>
           <h1 className="text-section mt-3">The kitchen has your order.</h1>
           <p className="mt-4 text-body text-stone">Keep this reference — it updates live as we cook.</p>
           <p className="mt-6 text-kpi tabular-nums">{placed.reference}</p>
@@ -208,9 +208,9 @@ export default function OrderPage() {
   /* -------------------------------- checkout ----------------------------- */
   return (
     <section className="editorial-width pt-10 pb-16 md:pt-14">
-      <p className="label-caps mb-5 text-champagne">Order online</p>
+      <p className="label-caps mb-5 text-champagne-text">Order online</p>
       <h1 className="text-page">
-        Your order<span className="text-champagne">.</span>
+        Your order<span className="text-champagne-text">.</span>
       </h1>
       <p className="mt-5 max-w-xl text-lead text-stone">
         Choose pickup or delivery, tell us where to send it, and we will take it straight to the kitchen. Payment is
@@ -264,7 +264,7 @@ export default function OrderPage() {
                       disabled={disabled}
                       onChange={() => chooseType(option.value)}
                     />
-                    <Icon className="mt-0.5 size-5 shrink-0 text-champagne" aria-hidden />
+                    <Icon className="mt-0.5 size-5 shrink-0 text-champagne-text" aria-hidden />
                     <span className="min-w-0">
                       <span className="flex items-center gap-2 text-[15px] font-medium">
                         {option.title}

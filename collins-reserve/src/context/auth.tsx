@@ -1,14 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import {
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signOut as fbSignOut,
-  type User,
-} from 'firebase/auth'
 import { doc, onSnapshot } from 'firebase/firestore'
-import { getFirebaseAuth, getDb } from '@/services/firebase'
+import { getFirebaseAuth, getDb, loadAuth } from '@/services/firebase'
 import type { RestaurantUser } from '@/types'
+import type { User } from 'firebase/auth'
 
 interface AuthContextValue {
   user: User | null
@@ -28,18 +22,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(
-      getFirebaseAuth(),
-      (next) => {
-        setUser(next)
-        if (!next) {
-          setProfile(null)
-          setLoading(false)
-        }
-      },
-      () => setLoading(false),
-    )
-    return unsub
+    let unsub = () => {}
+    let cancelled = false
+    void loadAuth().then(({ onAuthStateChanged }) => {
+      if (cancelled) return
+      unsub = onAuthStateChanged(
+        getFirebaseAuth(),
+        (next) => {
+          setUser(next)
+          if (!next) {
+            setProfile(null)
+            setLoading(false)
+          }
+        },
+        () => setLoading(false),
+      )
+    })
+    return () => {
+      cancelled = true
+      unsub()
+    }
   }, [])
 
   useEffect(() => {
@@ -62,12 +64,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       loading,
       isAdmin: profile?.role === 'admin' || profile?.role === 'manager',
       signIn: async (email, password) => {
+        const { signInWithEmailAndPassword } = await loadAuth()
         await signInWithEmailAndPassword(getFirebaseAuth(), email.trim(), password)
       },
       signOut: async () => {
-        await fbSignOut(getFirebaseAuth())
+        const { signOut } = await loadAuth()
+        await signOut(getFirebaseAuth())
       },
       sendPasswordReset: async (email) => {
+        const { sendPasswordResetEmail } = await loadAuth()
         await sendPasswordResetEmail(getFirebaseAuth(), email.trim())
       },
     }),

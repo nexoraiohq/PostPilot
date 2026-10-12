@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Info, ShieldAlert } from 'lucide-react'
 import { useToast } from '@/context/toast'
 import { Badge } from '@/components/ui/Badge'
@@ -446,7 +446,7 @@ export default function AdminSettingsPage() {
             <Badge tone="champagne">Read only</Badge>
           </div>
           <div className="mt-5 flex items-start gap-3 rounded-xl border border-line bg-ivory p-4">
-            <Info className="mt-0.5 size-4 shrink-0 text-champagne" aria-hidden />
+            <Info className="mt-0.5 size-4 shrink-0 text-champagne-text" aria-hidden />
             <p className="text-support text-stone">{restaurant?.demoNotice}</p>
           </div>
         </Card>

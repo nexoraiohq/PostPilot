@@ -54,7 +54,13 @@ export function CartDrawer() {
                     </p>
                   )}
                   <div className="mt-3 flex items-center justify-between gap-3">
-                    <QtyStepper value={line.quantity} onChange={(q) => setQuantity(line.key, q)} size="sm" min={0} />
+                    <QtyStepper
+                      value={line.quantity}
+                      onChange={(q) => setQuantity(line.key, q)}
+                      size="sm"
+                      min={0}
+                      label={line.name}
+                    />
                     <span className="text-sm font-medium tabular-nums">{formatKes(line.unitPriceKes * line.quantity)}</span>
                   </div>
                 </div>

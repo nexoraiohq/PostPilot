@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -81,14 +81,29 @@ export function AdminLayout() {
   const { profile, signOut } = useAuth()
   const [mobileNav, setMobileNav] = useState(false)
 
+  useEffect(() => {
+    if (!mobileNav) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileNav(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [mobileNav])
+
   return (
     <AdminGuard>
       <div className="flex min-h-dvh bg-ivory">
+        <a
+          href="#admin-main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-[14px] focus:font-medium focus:text-ivory"
+        >
+          Skip to content
+        </a>
         <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-line bg-paper lg:flex">
           <div className="border-b border-line px-5 py-5">
             <Link to="/" className="block">
               <span className="font-display text-[13px] font-medium uppercase tracking-[0.3em] text-ink">Maison Noir</span>
-              <span className="mt-1 block text-[10px] font-medium uppercase tracking-[0.2em] text-champagne">Operations</span>
+              <span className="mt-1 block text-[10px] font-medium uppercase tracking-[0.2em] text-champagne-text">Operations</span>
             </Link>
           </div>
           <div className="flex-1 overflow-y-auto p-3">
@@ -129,7 +144,7 @@ export function AdminLayout() {
             </Link>
           </div>
 
-          <main className="flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
+          <main id="admin-main" tabIndex={-1} className="flex-1 px-4 py-6 outline-none sm:px-6 lg:px-10 lg:py-8">
             <Outlet />
           </main>
         </div>
