@@ -37,7 +37,7 @@ function StepDot({ state, index }: { state: 'done' | 'current' | 'todo'; index: 
       className={cn(
         'relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-medium tabular-nums transition-colors duration-300',
         state === 'done' && 'border-ink bg-ink text-ivory',
-        state === 'current' && 'border-2 border-ink bg-paper text-ink shadow-[0_0_0_4px_#e9dcc6]',
+        state === 'current' && 'border-2 border-ink bg-paper text-ink shadow-[0_0_0_4px_#f2e6d6]',
         state === 'todo' && 'border-line bg-paper text-stone',
       )}
     >

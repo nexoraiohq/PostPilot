@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react'
 import { format } from 'date-fns'
 import { RESERVATION_STATUS_LABELS, type Reservation, type ReservationStatus } from '@/types'
@@ -286,7 +286,7 @@ export default function AdminReservationsPage() {
             </div>
             <div className="rounded-xl border border-line bg-paper px-4 py-2">
               <p className="label-caps text-stone">Pending</p>
-              <p className="mt-1 text-lg leading-none font-medium text-[#8a6f42] tabular-nums">
+              <p className="mt-1 text-lg leading-none font-medium text-champagne-text tabular-nums">
                 {loading ? '–' : stats.pendingCount}
               </p>
             </div>
@@ -372,7 +372,7 @@ export default function AdminReservationsPage() {
                     <span
                       className={cn(
                         'text-[13px] font-medium tabular-nums',
-                        isToday && !isSelected && 'text-[#8a6f42]',
+                        isToday && !isSelected && 'text-champagne-text',
                         isSelected && 'text-ivory',
                       )}
                     >

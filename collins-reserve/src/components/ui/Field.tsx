@@ -2,7 +2,7 @@ import { forwardRef, useId, type InputHTMLAttributes, type SelectHTMLAttributes,
 import { cn } from '@/utils/cn'
 
 const fieldBase =
-  'w-full rounded-xl border border-line bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-stone/70 transition-colors duration-150 hover:border-stone/40 focus:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:opacity-50'
+  'w-full rounded-lg border border-line bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-stone/60 transition-colors duration-150 hover:border-stone/40 focus:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:opacity-50'
 
 export interface FieldProps {
   label: string

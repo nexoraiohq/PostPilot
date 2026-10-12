@@ -3,7 +3,7 @@ import { Inbox } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
 export function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('animate-pulse rounded-xl bg-line/50', className)} {...props} />
+  return <div className={cn('animate-pulse rounded-lg bg-line/50', className)} {...props} />
 }
 
 export function Spinner({ className }: { className?: string }) {
@@ -26,8 +26,8 @@ export interface EmptyStateProps {
 
 export function EmptyState({ title, description, action, icon, className }: EmptyStateProps) {
   return (
-    <div className={cn('flex flex-col items-center justify-center rounded-2xl border border-dashed border-line bg-paper/50 px-8 py-16 text-center', className)}>
-      <div className="mb-4 rounded-full bg-ivory p-3 text-stone">{icon ?? <Inbox className="size-5" aria-hidden />}</div>
+    <div className={cn('flex flex-col items-center justify-center rounded-xl border border-dashed border-line bg-paper/50 px-8 py-16 text-center', className)}>
+      <div className="mb-4 rounded-lg bg-ivory p-3 text-stone">{icon ?? <Inbox className="size-5" aria-hidden />}</div>
       <h3 className="text-card text-ink">{title}</h3>
       {description && <p className="mt-2 max-w-sm text-support text-stone">{description}</p>}
       {action && <div className="mt-6">{action}</div>}

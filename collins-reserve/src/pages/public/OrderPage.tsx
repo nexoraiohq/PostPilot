@@ -447,8 +447,8 @@ export default function OrderPage() {
           {/* Payment */}
           <div className="rounded-2xl border border-champagne/50 bg-champagne-soft/40 p-6 sm:p-7">
             <div className="flex items-center justify-between gap-3">
-              <p className="label-caps text-[#8a6f42]">Demo checkout</p>
-              <CreditCard className="size-4 text-[#8a6f42]" aria-hidden />
+              <p className="label-caps text-champagne-text">Demo checkout</p>
+              <CreditCard className="size-4 text-champagne-text" aria-hidden />
             </div>
             <h2 className="text-card mt-3">Payment</h2>
             <label

@@ -15,9 +15,9 @@ export interface QtyStepperProps {
 export function QtyStepper({ value, onChange, min = 0, max = 20, className, size = 'md', label }: QtyStepperProps) {
   const name = label ? ` of ${label}` : ''
   const btn =
-    'flex items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/5 disabled:opacity-30 disabled:hover:bg-transparent'
+    'flex items-center justify-center rounded-md text-ink transition-colors hover:bg-ink/5 disabled:opacity-30 disabled:hover:bg-transparent'
   return (
-    <div className={cn('inline-flex items-center gap-1 rounded-full border border-line bg-paper', size === 'sm' ? 'p-0.5' : 'p-1', className)}>
+    <div className={cn('inline-flex items-center gap-1 rounded-lg border border-line bg-paper', size === 'sm' ? 'p-0.5' : 'p-1', className)}>
       <button
         type="button"
         aria-label={`Decrease quantity${name}`}

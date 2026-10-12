@@ -23,14 +23,14 @@ function Wordmark({ className, compact }: { className?: string; compact?: boolea
     <span className={cn('inline-flex flex-col leading-none', className)}>
       <span
         className={cn(
-          'font-display font-medium uppercase tracking-[0.32em] text-ink',
+          'font-display font-medium uppercase tracking-[0.3em] text-ivory',
           compact ? 'text-[13px]' : 'text-[15px] sm:text-[17px]',
         )}
       >
         Maison Noir
       </span>
       {!compact && (
-        <span className="mt-1 text-[9px] font-medium uppercase tracking-[0.34em] text-stone">Est. 2026</span>
+        <span className="mt-1 text-[9px] font-medium uppercase tracking-[0.34em] text-champagne">Est. 2026</span>
       )}
     </span>
   )
@@ -41,12 +41,12 @@ function AnnouncementStrip() {
   if (dismissed) return null
   const message = 'Seasonal tasting menu now booking · Six courses · Thursday to Saturday evenings'
   return (
-    <div className="relative bg-ink text-ivory">
+    <div className="relative bg-champagne text-ink">
       <p className="sr-only">{message}</p>
       <div className="flex h-9 items-center overflow-hidden" aria-hidden>
         <div className="flex w-max animate-marquee gap-16 pl-4">
           {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="label-caps whitespace-nowrap text-champagne-soft/90">
+            <span key={i} className="label-caps whitespace-nowrap text-ink/80">
               {message}
               {' · '}
               {message}
@@ -61,7 +61,7 @@ function AnnouncementStrip() {
           sessionStorage.setItem('mn-announce-dismissed', '1')
           setDismissed(true)
         }}
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-ivory/70 transition-colors hover:bg-white/10 hover:text-ivory"
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-ink/70 transition-colors hover:bg-ink/10 hover:text-ink"
       >
         <X className="size-3.5" aria-hidden />
       </button>
@@ -118,8 +118,8 @@ export function SiteHeader() {
       <AnnouncementStrip />
       <div
         className={cn(
-          'border-b transition-all duration-300 ease-out',
-          scrolled ? 'border-line bg-ivory/92 backdrop-blur-xl' : 'border-transparent bg-ivory',
+          'border-b border-white/10 bg-ink transition-all duration-300 ease-out',
+          scrolled ? 'shadow-float' : '',
         )}
       >
         <div
@@ -142,8 +142,8 @@ export function SiteHeader() {
                 onFocus={() => prefetchRoute(item.to)}
                 className={({ isActive }) =>
                   cn(
-                    'relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.04em] transition-colors duration-200',
-                    isActive ? 'text-ink' : 'text-stone hover:text-ink',
+                    'relative rounded-md px-4 py-2 text-[13px] font-medium tracking-[0.03em] transition-colors duration-200',
+                    isActive ? 'text-ivory' : 'text-ivory/55 hover:text-ivory',
                   )
                 }
               >
@@ -164,12 +164,12 @@ export function SiteHeader() {
               type="button"
               data-cart-target
               onClick={openCart}
-              className="relative rounded-full p-2.5 text-ink transition-colors hover:bg-ink/5"
+              className="relative rounded-md p-2.5 text-ivory transition-colors hover:bg-white/10"
               aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
             >
               <ShoppingBag className="size-[18px]" aria-hidden />
               {itemCount > 0 && (
-                <span className="absolute right-0.5 top-0.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] font-semibold text-ivory">
+                <span className="absolute right-0.5 top-0.5 flex size-4 items-center justify-center rounded-full bg-champagne text-[9px] font-semibold text-ink">
                   {itemCount}
                 </span>
               )}
@@ -178,15 +178,16 @@ export function SiteHeader() {
               to="/order"
               variant="ghost"
               size="sm"
-              className="hidden sm:inline-flex"
+              className="hidden text-ivory hover:bg-white/10 sm:inline-flex"
               onMouseEnter={() => prefetchRoute('/order')}
             >
               Order Online
             </LinkButton>
             <LinkButton
               to="/reserve"
+              variant="secondary"
               size="sm"
-              className="hidden sm:inline-flex"
+              className="hidden border-champagne/50 bg-champagne/10 text-champagne hover:border-champagne hover:bg-champagne/20 sm:inline-flex"
               onMouseEnter={() => prefetchRoute('/reserve')}
             >
               Reserve a Table
@@ -194,7 +195,7 @@ export function SiteHeader() {
             <button
               ref={mobileTriggerRef}
               type="button"
-              className="rounded-full p-2.5 text-ink transition-colors hover:bg-ink/5 lg:hidden"
+              className="rounded-md p-2.5 text-ivory transition-colors hover:bg-white/10 lg:hidden"
               aria-label="Open menu"
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(true)}
@@ -217,12 +218,12 @@ export function SiteHeader() {
           }}
         >
           <div className="flex h-16 items-center justify-between px-5">
-            <span className="font-display text-[15px] font-medium uppercase tracking-[0.32em]">Maison Noir</span>
+            <span className="font-display text-[15px] font-medium uppercase tracking-[0.3em]">Maison Noir</span>
             <button
               type="button"
               aria-label="Close menu"
               onClick={() => setMobileOpen(false)}
-              className="rounded-full p-2 text-ivory/80 hover:bg-white/10"
+              className="rounded-md p-2 text-ivory/80 hover:bg-white/10"
             >
               <X className="size-5" aria-hidden />
             </button>
@@ -236,8 +237,8 @@ export function SiteHeader() {
                 onMouseEnter={() => prefetchRoute(item.to)}
                 className={({ isActive }) =>
                   cn(
-                    'font-display py-3 text-5xl font-semibold tracking-tight transition-colors',
-                    isActive ? 'text-champagne' : 'text-ivory/90 hover:text-ivory',
+                    'font-display py-3 text-5xl font-medium tracking-tight transition-colors',
+                    isActive ? 'text-champagne' : 'text-ivory/85 hover:text-ivory',
                   )
                 }
                 style={{ animationDelay: `${index * 40}ms` }}
@@ -257,13 +258,13 @@ export function SiteHeader() {
               >
                 Order Online
               </LinkButton>
-              <Link to="/contact" className="mt-2 text-center text-[13px] tracking-[0.08em] text-ivory/60 uppercase hover:text-ivory">
+              <Link to="/contact" className="mt-2 text-center text-[13px] tracking-[0.08em] text-ivory/55 uppercase hover:text-ivory">
                 Contact &amp; Visit
               </Link>
             </div>
           </nav>
           <div className="absolute inset-x-0 bottom-0 border-t border-white/10 px-6 py-4 text-center">
-            <p className="text-[12px] tracking-[0.14em] text-ivory/70 uppercase">
+            <p className="text-[12px] tracking-[0.14em] text-ivory/60 uppercase">
               {settings ? 'Nairobi · Kenya' : 'Nairobi · Kenya'}
             </p>
           </div>
@@ -281,7 +282,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-ivory">
       <div className="editorial-width section-y grid gap-12 md:grid-cols-12">
         <div className="md:col-span-4">
-          <p className="font-display text-xl font-medium uppercase tracking-[0.32em]">Maison Noir</p>
+          <p className="font-display text-xl font-medium uppercase tracking-[0.3em]">Maison Noir</p>
           <p className="mt-1 text-[9px] font-medium uppercase tracking-[0.34em] text-champagne">Est. 2026</p>
           <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-ivory/65">
             A slower kind of dining. Seasonal ingredients, thoughtful cooking, and an evening worth remembering.

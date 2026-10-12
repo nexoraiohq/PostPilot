@@ -62,7 +62,7 @@ export function Modal({ open, onClose, title, children, className, wide }: Modal
       <div
         ref={panelRef}
         className={cn(
-          'relative z-10 max-h-[92dvh] w-full overflow-y-auto rounded-t-3xl bg-paper shadow-modal sm:rounded-3xl',
+          'relative z-10 max-h-[92dvh] w-full overflow-y-auto rounded-t-2xl bg-paper shadow-modal sm:rounded-2xl',
           wide ? 'sm:max-w-3xl' : 'sm:max-w-lg',
           className,
         )}
@@ -73,7 +73,7 @@ export function Modal({ open, onClose, title, children, className, wide }: Modal
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="rounded-full p-2 text-stone transition-colors hover:bg-ivory hover:text-ink"
+            className="rounded-md p-2 text-stone transition-colors hover:bg-ivory hover:text-ink"
           >
             <X className="size-5" aria-hidden />
           </button>
@@ -145,7 +145,7 @@ export function Drawer({ open, onClose, title, children }: DrawerProps) {
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="rounded-full p-2 text-stone transition-colors hover:bg-paper hover:text-ink"
+            className="rounded-md p-2 text-stone transition-colors hover:bg-paper hover:text-ink"
           >
             <X className="size-5" aria-hidden />
           </button>

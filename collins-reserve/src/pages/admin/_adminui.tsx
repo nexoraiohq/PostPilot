@@ -30,7 +30,7 @@ export function PageHead({
 }
 
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('rounded-2xl border border-line bg-paper p-5 sm:p-6', className)}>{children}</div>
+  return <div className={cn('rounded-xl border border-line bg-paper p-5 shadow-card sm:p-6', className)}>{children}</div>
 }
 
 export function KpiCard({
@@ -45,14 +45,14 @@ export function KpiCard({
   tone?: 'success' | 'error' | 'champagne'
 }) {
   return (
-    <div className="rounded-2xl border border-line bg-paper p-5">
+    <div className="rounded-xl border border-line bg-paper p-5 shadow-card">
       <p className="label-caps text-stone">{label}</p>
       <p
         className={cn(
           'mt-3 text-kpi tabular-nums',
           tone === 'success' && 'text-success',
           tone === 'error' && 'text-error',
-          tone === 'champagne' && 'text-[#8a6f42]',
+          tone === 'champagne' && 'text-champagne-text',
         )}
       >
         {value}
@@ -85,7 +85,7 @@ export function SegmentedTabs<T extends string>({
   onChange: (value: T) => void
 }) {
   return (
-    <div role="tablist" aria-label="View" className="inline-flex flex-wrap items-center gap-1 rounded-full border border-line bg-paper p-1">
+    <div role="tablist" aria-label="View" className="inline-flex flex-wrap items-center gap-1 rounded-lg border border-line bg-paper p-1">
       {options.map((option) => {
         const active = option.value === value
         return (
@@ -96,7 +96,7 @@ export function SegmentedTabs<T extends string>({
             aria-selected={active}
             onClick={() => onChange(option.value)}
             className={cn(
-              'min-h-10 rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors duration-150',
+              'min-h-10 rounded-md px-4 py-1.5 text-[13px] font-medium transition-colors duration-150',
               active ? 'bg-ink text-ivory' : 'text-stone hover:bg-ink/[0.05] hover:text-ink',
             )}
           >
@@ -130,7 +130,7 @@ export function SearchInput({
         onChange={(e) => onChange(e.target.value)}
         aria-label={label}
         placeholder={placeholder}
-        className="h-10 w-full min-w-0 rounded-xl border border-line bg-paper py-0 pr-3 pl-9 text-sm text-ink placeholder:text-stone/70 transition-colors hover:border-stone/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:min-w-56"
+        className="h-10 w-full min-w-0 rounded-lg border border-line bg-paper py-0 pr-3 pl-9 text-sm text-ink placeholder:text-stone/60 transition-colors hover:border-stone/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:min-w-56"
       />
     </div>
   )
@@ -155,7 +155,7 @@ export function FilterSelect<T extends string>({
         value={value}
         onChange={(e) => onChange(e.target.value as T)}
         aria-label={label}
-        className="h-10 min-w-0 appearance-none rounded-xl border border-line bg-paper py-0 pr-9 pl-3 text-sm text-ink transition-colors hover:border-stone/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className="h-10 min-w-0 appearance-none rounded-lg border border-line bg-paper py-0 pr-9 pl-3 text-sm text-ink transition-colors hover:border-stone/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

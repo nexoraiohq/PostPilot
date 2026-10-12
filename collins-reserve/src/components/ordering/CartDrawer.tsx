@@ -31,7 +31,7 @@ export function CartDrawer() {
           <ul className="divide-y divide-line px-6">
             {lines.map((line) => (
               <li key={line.key} className="flex gap-4 py-5">
-                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-line/40">
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-line/40">
                   {line.imageUrl && (
                     <img src={line.imageUrl} alt="" className="size-full object-cover" loading="lazy" />
                   )}
@@ -43,7 +43,7 @@ export function CartDrawer() {
                       type="button"
                       aria-label={`Remove ${line.name}`}
                       onClick={() => removeLine(line.key)}
-                      className="rounded-full p-1.5 text-stone transition-colors hover:bg-error-soft hover:text-error"
+                      className="rounded-md p-1.5 text-stone transition-colors hover:bg-error-soft hover:text-error"
                     >
                       <Trash2 className="size-4" aria-hidden />
                     </button>

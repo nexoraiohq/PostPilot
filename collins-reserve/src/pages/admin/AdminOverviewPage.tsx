@@ -188,10 +188,10 @@ export default function AdminOverviewPage() {
                     dataKey="label"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#858177', fontSize: 11 }}
+                    tick={{ fill: '#6b6456', fontSize: 11 }}
                     interval={0}
                   />
-                  <YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{ fill: '#858177', fontSize: 11 }} />
+                  <YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{ fill: '#6b6456', fontSize: 11 }} />
                   <Tooltip
                     cursor={{ fill: 'rgba(23,23,21,0.04)' }}
                     contentStyle={{
@@ -201,7 +201,7 @@ export default function AdminOverviewPage() {
                       fontSize: 12,
                       boxShadow: '0 8px 24px rgba(23,23,21,0.08)',
                     }}
-                    labelStyle={{ color: '#858177' }}
+                    labelStyle={{ color: '#6b6456' }}
                     itemStyle={{ color: '#171715' }}
                   />
                   <Bar dataKey="orders" name="Orders" fill="#171715" radius={[3, 3, 0, 0]} maxBarSize={34} />

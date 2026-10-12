@@ -20,10 +20,10 @@ import { subscribeToReservations } from '@/services/reservations.service'
 import { ORDER_STATUS_LABELS, type Order, type OrderStatus, type Reservation } from '@/types'
 import { Card, KpiCard, PageHead, SegmentedTabs, tableClasses } from '@/pages/admin/_adminui'
 
-const INK = '#171715'
-const CHAMPAGNE = '#c8ad83'
-const STONE = '#858177'
-const LINE = '#e4e0d7'
+const INK = '#15120d'
+const CHAMPAGNE = '#c08a5a'
+const STONE = '#6b6456'
+const LINE = '#e8e1d4'
 
 const DAY_FORMATTER = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Africa/Nairobi',

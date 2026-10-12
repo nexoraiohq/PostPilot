@@ -7,11 +7,11 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'quiet'
 type Size = 'sm' | 'md' | 'lg'
 
 const base =
-  'relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal tracking-[-0.01em] transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-40 active:scale-[0.98] select-none'
+  'relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium tracking-[-0.005em] transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-40 active:scale-[0.985] select-none'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-ink text-ivory hover:bg-ink-soft shadow-[0_1px_0_rgba(23,23,21,0.06)]',
-  secondary: 'border border-ink/15 bg-transparent text-ink hover:border-ink/40 hover:bg-ink/[0.03]',
+  primary: 'bg-ink text-ivory hover:bg-ink-soft shadow-[0_1px_0_rgba(21,18,13,0.08)]',
+  secondary: 'border border-ink/20 bg-transparent text-ink hover:border-ink/45 hover:bg-ink/[0.03]',
   ghost: 'bg-transparent text-ink hover:bg-ink/[0.05]',
   danger: 'bg-error text-white hover:bg-error/90',
   quiet: 'bg-ivory text-ink border border-line hover:bg-paper',
@@ -19,8 +19,8 @@ const variants: Record<Variant, string> = {
 
 const sizes: Record<Size, string> = {
   sm: 'h-9 px-4 text-[14px]',
-  md: 'h-11 px-6 text-[17px]',
-  lg: 'h-13 px-8 text-[17px]',
+  md: 'h-11 px-6 text-[16px]',
+  lg: 'h-13 px-8 text-[16px]',
 }
 
 export function buttonStyles(variant: Variant = 'primary', size: Size = 'md', className?: string) {
