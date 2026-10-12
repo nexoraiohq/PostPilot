@@ -19,8 +19,8 @@ function Band({ eyebrow, title, image, alt, reverse = false, children }: BandPro
   return (
     <section aria-label={eyebrow} className="editorial-width section-y">
       <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
-        <div className={cn('lg:col-span-5', reverse ? 'lg:order-2' : 'lg:order-1')}>
-          <div className="overflow-hidden rounded-2xl bg-line/40 lg:rounded-3xl">
+        <div className={cn('lg:col-span-5', reverse ? 'lg:order-2 lg:mt-20' : 'lg:order-1 lg:-mt-10')}>
+          <div className="overflow-hidden rounded-2xl bg-line/40">
             <img
               src={image}
               alt={alt}
@@ -32,7 +32,10 @@ function Band({ eyebrow, title, image, alt, reverse = false, children }: BandPro
           </div>
         </div>
         <div className={cn('lg:col-span-6', reverse ? 'lg:order-1' : 'lg:order-2')}>
-          <p className="label-caps mb-4 text-champagne-text">{eyebrow}</p>
+          <p className="label-caps mb-4 flex items-baseline gap-3 text-champagne-text">
+            <span className="tabular-nums text-stone/50">{eyebrow === 'Philosophy' ? '02' : eyebrow === 'Ingredients & growers' ? '03' : '04'}</span>
+            {eyebrow}
+          </p>
           <h2 className="text-section max-w-xl">{title}</h2>
           <div className="mt-6 max-w-xl space-y-4 text-body text-stone">{children}</div>
         </div>
@@ -43,11 +46,11 @@ function Band({ eyebrow, title, image, alt, reverse = false, children }: BandPro
 
 function PullQuote({ children, caption }: { children: React.ReactNode; caption: string }) {
   return (
-    <figure className="editorial-width pb-2 pt-4">
-      <blockquote className="mx-auto max-w-3xl border-t border-line pt-10 text-center text-section">
-        {children}
-      </blockquote>
-      <figcaption className="label-caps mt-5 text-center text-stone">{caption}</figcaption>
+    <figure className="editorial-width py-6">
+      <div className="max-w-3xl border-l-2 border-champagne pl-6 md:pl-10">
+        <blockquote className="text-section">{children}</blockquote>
+        <figcaption className="label-caps mt-5 text-stone">{caption}</figcaption>
+      </div>
     </figure>
   )
 }
@@ -143,10 +146,13 @@ export default function StoryPage() {
       <section aria-label="Hospitality" className="editorial-width section-y">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <p className="label-caps mb-4 text-champagne-text">Hospitality</p>
+            <p className="label-caps mb-4 flex items-baseline gap-3 text-champagne-text">
+              <span className="tabular-nums text-stone/50">05</span>
+              Hospitality
+            </p>
             <h2 className="text-section">Service that reads the table.</h2>
           </div>
-          <div className="space-y-4 text-body text-stone lg:col-span-7 lg:col-start-6">
+          <div className="space-y-4 text-body text-stone lg:col-span-7 lg:col-start-6 lg:pt-10">
             <p>
               We seat you, and then we leave you to it. Courses arrive when you are ready rather than when a timer
               says so, tastes come before full glasses, and if you want to talk between courses for twenty minutes,
@@ -163,12 +169,12 @@ export default function StoryPage() {
 
       {/* 06 — Continue */}
       <section aria-label="Continue" className="border-t border-line">
-        <div className="editorial-width section-y text-center">
+        <div className="editorial-width section-y">
           <p className="label-caps mb-4 text-champagne-text">Next</p>
-          <h2 className="mx-auto max-w-2xl text-section">
+          <h2 className="max-w-2xl text-section">
             Read the menu, or take a seat at one.
           </h2>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <LinkButton to="/menu" variant="secondary" size="md">
               View the menu
               <ArrowUpRight className="size-4" aria-hidden />

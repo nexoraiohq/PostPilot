@@ -11,20 +11,23 @@ function ExperienceRow({ experience, index }: { experience: DiningExperience; in
   const reversed = index % 2 === 1
   return (
     <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
-      <div className={cn('lg:col-span-6', reversed ? 'lg:order-2' : 'lg:order-1')}>
-        <div className="overflow-hidden rounded-2xl bg-line/40 lg:rounded-3xl">
+      <div className={cn('lg:col-span-6', reversed ? 'lg:order-2 lg:-mt-8' : 'lg:order-1 lg:mt-12')}>
+        <div className="overflow-hidden rounded-2xl bg-line/40">
           <img
             src={experience.imageUrl}
             alt={experience.name}
             loading="lazy"
             width={1400}
             height={933}
-            className="aspect-[3/2] w-full object-cover"
+            className={index % 3 === 1 ? 'aspect-[4/5] w-full object-cover' : 'aspect-[3/2] w-full object-cover'}
           />
         </div>
       </div>
       <div className={cn('lg:col-span-6', reversed ? 'lg:order-1' : 'lg:order-2')}>
-        <p className="label-caps mb-4 text-champagne-text">Experience {String(index + 1).padStart(2, '0')}</p>
+        <p className="label-caps mb-4 flex items-baseline gap-3 text-champagne-text">
+          <span className="tabular-nums text-stone/50">{String(index + 1).padStart(2, '0')}</span>
+          Experience
+        </p>
         <h2 className="text-section max-w-xl">{experience.name}</h2>
         <p className="mt-5 max-w-xl text-lead text-stone">{experience.description}</p>
 
@@ -140,19 +143,24 @@ export default function ExperiencesPage() {
       {/* Enquiry strip */}
       <section aria-label="Enquiries" className="border-t border-line">
         <div className="editorial-width section-y">
-          <div className="flex flex-col gap-6 rounded-3xl border border-line bg-paper p-7 md:flex-row md:items-center md:justify-between md:p-10">
-            <div>
-              <p className="label-caps mb-3 text-champagne-text">Something bespoke</p>
-              <h2 className="text-section max-w-lg">Planning a private evening or an event?</h2>
-              <p className="mt-3 max-w-md text-support text-stone">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="label-caps mb-3 flex items-baseline gap-3 text-champagne-text">
+                <span className="tabular-nums text-stone/50">04</span>
+                Something bespoke
+              </p>
+              <h2 className="text-section">Planning a private evening or an event?</h2>
+              <p className="mt-4 max-w-xl text-body text-stone">
                 Tell us the date, the occasion and roughly how many seats you need — we will come back with ideas,
                 timings and a price.
               </p>
+              <div className="mt-8">
+                <LinkButton to="/contact" variant="secondary" size="md">
+                  Enquire with us
+                  <ArrowUpRight className="size-4" aria-hidden />
+                </LinkButton>
+              </div>
             </div>
-            <LinkButton to="/contact" variant="secondary" size="md" className="shrink-0">
-              Enquire with us
-              <ArrowUpRight className="size-4" aria-hidden />
-            </LinkButton>
           </div>
         </div>
       </section>

@@ -58,10 +58,10 @@ function AddToCartButton({
   )
 }
 
-function DishCard({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
+function DishCard({ item, onAdd, offset }: { item: MenuItem; onAdd: AddSource; offset?: boolean }) {
   const imgRef = useRef<HTMLImageElement>(null)
   return (
-    <li>
+    <li className={offset ? 'lg:mt-14' : undefined}>
       <article className="group">
         <div className="relative overflow-hidden rounded-2xl bg-line/40">
           <img
@@ -353,9 +353,9 @@ export default function MenuPage() {
           />
         ) : (
           <>
-            <ul className="hidden gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3">
-              {visibleItems.map((item) => (
-                <DishCard key={item.id} item={item} onAdd={handleAddToCart} />
+            <ul className="hidden gap-x-6 gap-y-12 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+              {visibleItems.map((item, i) => (
+                <DishCard key={item.id} item={item} onAdd={handleAddToCart} offset={i % 3 === 1} />
               ))}
             </ul>
             <ul className="divide-y divide-line border-t border-line sm:hidden">

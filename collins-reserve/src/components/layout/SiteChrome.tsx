@@ -39,20 +39,12 @@ function Wordmark({ className, compact }: { className?: string; compact?: boolea
 function AnnouncementStrip() {
   const [dismissed, setDismissed] = useState(() => sessionStorage.getItem('mn-announce-dismissed') === '1')
   if (dismissed) return null
-  const message = 'Seasonal tasting menu now booking · Six courses · Thursday to Saturday evenings'
   return (
     <div className="relative bg-champagne text-ink">
-      <p className="sr-only">{message}</p>
-      <div className="flex h-9 items-center overflow-hidden" aria-hidden>
-        <div className="flex w-max animate-marquee gap-16 pl-4">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="label-caps whitespace-nowrap text-ink/80">
-              {message}
-              {' · '}
-              {message}
-            </span>
-          ))}
-        </div>
+      <div className="editorial-width flex h-9 items-center justify-center px-10">
+        <p className="truncate text-center text-[11px] font-medium tracking-[0.12em] uppercase">
+          Seasonal tasting menu now booking · Six courses · Thu–Sat evenings
+        </p>
       </div>
       <button
         type="button"
