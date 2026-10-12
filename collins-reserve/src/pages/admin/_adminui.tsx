@@ -21,7 +21,7 @@ export function PageHead({
   return (
     <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div className="min-w-0">
-        <h1 className="font-display text-3xl leading-none font-light tracking-[-0.01em] text-ink sm:text-4xl">{title}</h1>
+        <h1 className="font-display text-3xl leading-none font-semibold tracking-[-0.015em] text-ink sm:text-4xl">{title}</h1>
         {subtitle && <p className="mt-2 text-support text-stone">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-3">{actions}</div>}

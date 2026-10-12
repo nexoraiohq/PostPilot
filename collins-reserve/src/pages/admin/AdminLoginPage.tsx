@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
             <ArrowLeft className="size-3.5" aria-hidden />
             Restaurant site
           </Link>
-          <p className="mt-12 font-display text-[clamp(2rem,1rem+4vw,3.5rem)] leading-[1.05] font-light tracking-[0.06em] uppercase">
+          <p className="mt-12 font-display text-[clamp(2rem,1rem+4vw,3.5rem)] leading-[1.05] font-semibold tracking-[0.06em] uppercase">
             Maison
             <br />
             Noir<span className="text-champagne">.</span>
@@ -129,7 +129,7 @@ export default function AdminLoginPage() {
       <section className="flex items-center justify-center bg-ivory px-5 py-12 sm:px-10">
         <div className="w-full max-w-md">
           <p className="label-caps text-stone">Sign in</p>
-          <h1 className="mt-3 font-display text-4xl leading-none font-light text-ink sm:text-5xl">Operations console</h1>
+          <h1 className="mt-3 font-display text-4xl leading-none font-semibold text-ink sm:text-5xl">Operations console</h1>
           <p className="mt-3 text-support text-stone">Live orders, reservations and service controls for today.</p>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-8 space-y-4">

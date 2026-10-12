@@ -17,17 +17,23 @@
   --color-error: #b5473c;
   --color-error-soft: #f8ecea;
 
-  --font-display: 'Cormorant Garamond', 'Times New Roman', Times, serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Typography — system stack copied from apple.com: SF Pro on Apple
+     devices, Inter (metrically similar) everywhere else. */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'SF Pro Icons', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'SF Pro Icons', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  /* Fluid editorial type scale */
-  --text-hero: clamp(2.75rem, 1.2rem + 6.2vw, 6.5rem);
-  --text-page: clamp(2.125rem, 1.4rem + 3.4vw, 4.5rem);
-  --text-section: clamp(1.75rem, 1.3rem + 1.9vw, 3rem);
-  --text-card: clamp(1.1875rem, 1.05rem + 0.45vw, 1.625rem);
-  --text-body: clamp(0.9375rem, 0.9rem + 0.15vw, 1.125rem);
-  --text-support: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
-  --text-kpi: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem);
+  /* Type scale — Apple's sizes (measured on apple.com), fluid between them:
+     hero ≤112px · page 80px (apple.com page-header-title) · section 56px
+     (tile-headline) · card 28px (product-tile-headline) · body 17px · 14px */
+  --text-hero: clamp(2.75rem, 1.1rem + 7.2vw, 7rem);
+  --text-page: clamp(2.25rem, 1.4rem + 4vw, 5rem);
+  --text-section: clamp(1.75rem, 1.2rem + 2.6vw, 3.5rem);
+  --text-card: clamp(1.25rem, 1.1rem + 0.5vw, 1.75rem);
+  --text-body: 1.0625rem;
+  --text-support: 0.875rem;
+  --text-kpi: clamp(1.875rem, 1.3rem + 2.2vw, 3.5rem);
 
   --shadow-card: 0 1px 2px rgb(23 23 21 / 0.04), 0 8px 24px rgb(23 23 21 / 0.05);
   --shadow-modal: 0 24px 80px rgb(23 23 21 / 0.22);
@@ -54,7 +60,8 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.6;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
     font-weight: 400;
   }
 
@@ -73,9 +80,9 @@
   h2,
   h3,
   h4 {
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
   }
 
   input,
@@ -108,59 +115,66 @@
 /* ------------------------------------------------------------------ */
 /* Utilities                                                           */
 /* ------------------------------------------------------------------ */
+/* Apple headline recipe: semibold 600, tight leading, negative tracking */
 @utility text-hero {
-  font-family: var(--font-display);
   font-size: var(--text-hero);
-  line-height: 1.02;
-  font-weight: 300;
+  line-height: 1.04;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 @utility text-page {
-  font-family: var(--font-display);
   font-size: var(--text-page);
   line-height: 1.05;
-  font-weight: 300;
+  font-weight: 600;
   letter-spacing: -0.015em;
 }
 
 @utility text-section {
-  font-family: var(--font-display);
   font-size: var(--text-section);
-  line-height: 1.1;
-  font-weight: 300;
+  line-height: 1.08;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 @utility text-card {
-  font-family: var(--font-display);
   font-size: var(--text-card);
-  line-height: 1.2;
-  font-weight: 400;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 @utility text-body {
   font-size: var(--text-body);
-  line-height: 1.65;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
 }
 
 @utility text-support {
   font-size: var(--text-support);
-  line-height: 1.55;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+/* Apple tile-subhead: 21px regular under large headlines */
+@utility text-lead {
+  font-size: clamp(1.1875rem, 1.1rem + 0.4vw, 1.3125rem);
+  line-height: 1.43;
+  font-weight: 400;
+  letter-spacing: -0.011em;
 }
 
 @utility text-kpi {
-  font-family: var(--font-sans);
   font-size: var(--text-kpi);
-  line-height: 1.1;
-  font-weight: 500;
+  line-height: 1.05;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 @utility label-caps {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 

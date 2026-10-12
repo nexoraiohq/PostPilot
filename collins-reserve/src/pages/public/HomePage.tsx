@@ -72,7 +72,7 @@ export default function HomePage() {
             </h1>
           </div>
           <div className="max-w-sm shrink-0 md:pb-3">
-            <p className="text-body text-stone">
+            <p className="text-lead text-stone">
               {restaurant?.positioning ??
                 'Seasonal ingredients. Thoughtful cooking. An evening worth remembering.'}
             </p>
@@ -199,7 +199,7 @@ export default function HomePage() {
             <h2 className="text-section max-w-xl">
               A small dining room built around one idea: cook what the season gives us.
             </h2>
-            <p className="mt-6 max-w-xl text-body text-stone">
+            <p className="mt-6 max-w-xl text-lead text-stone">
               {restaurant?.storyIntro ??
                 'MAISON NOIR is a small dining room built around one idea: cook what the season gives us, and give every table time.'}{' '}
               We buy from twelve growers and producers we know by name, write the menu weekly, and cook over charcoal
@@ -209,7 +209,7 @@ export default function HomePage() {
             <dl className="mt-10 grid gap-x-8 gap-y-6 border-t border-line pt-8 sm:grid-cols-2">
               {FACTS.map((fact) => (
                 <div key={fact.value}>
-                  <dt className="font-display text-3xl font-light text-ink">{fact.value}</dt>
+                  <dt className="font-display text-3xl font-semibold text-ink">{fact.value}</dt>
                   <dd className="mt-1 text-support text-stone">{fact.label}</dd>
                 </div>
               ))}

@@ -7,7 +7,7 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'quiet'
 type Size = 'sm' | 'md' | 'lg'
 
 const base =
-  'relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-[0.02em] transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-40 active:scale-[0.98] select-none'
+  'relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-normal tracking-[-0.01em] transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-40 active:scale-[0.98] select-none'
 
 const variants: Record<Variant, string> = {
   primary: 'bg-ink text-ivory hover:bg-ink-soft shadow-[0_1px_0_rgba(23,23,21,0.06)]',
@@ -18,9 +18,9 @@ const variants: Record<Variant, string> = {
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'h-9 px-4 text-[13px]',
-  md: 'h-11 px-6 text-sm',
-  lg: 'h-13 px-8 text-[15px]',
+  sm: 'h-9 px-4 text-[14px]',
+  md: 'h-11 px-6 text-[17px]',
+  lg: 'h-13 px-8 text-[17px]',
 }
 
 export function buttonStyles(variant: Variant = 'primary', size: Size = 'md', className?: string) {

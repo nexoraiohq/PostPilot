@@ -23,7 +23,7 @@ Realtime end-to-end: staff accepts an order in `/admin/orders` → the customer'
 ## Tech stack
 
 - **React 19 + TypeScript + Vite** (strict, `@` path alias), lazy-loaded routes
-- **Tailwind CSS v4** with a design-token layer (`src/styles/index.css`) — Cormorant Garamond + Inter, ivory/champagne/ink palette
+- **Tailwind CSS v4** with a design-token layer (`src/styles/index.css`) — Apple.com typography (SF Pro system stack, Inter fallback; measured sizes/weights/tracking), ivory/champagne/ink palette
 - **Firebase**: Firestore (live project, `africa-south1`), Authentication (email/password for staff), Hosting
 - **Security Rules** that recompute every order total from menu prices and lock reservation capacity (see [Security model](#security-model))
 - react-hook-form + zod, recharts, lucide-react, date-fns, oxlint
@@ -85,7 +85,7 @@ src/
   context/        cart (localStorage-persisted), auth, toasts
   hooks/          live Firestore data providers, UI hooks
   services/       all Firestore access (orders, reservations, menu, tables, restaurant)
-  styles/         Tailwind v4 @theme tokens + editorial typography utilities
+  styles/         Tailwind v4 @theme tokens + Apple-style typography utilities
 scripts/          seed.mjs, verify-rules.mjs, smoke.mjs
 ```
 

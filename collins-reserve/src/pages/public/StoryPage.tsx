@@ -68,7 +68,7 @@ export default function StoryPage() {
             <br />
             to the table<span className="text-champagne">.</span>
           </h1>
-          <p className="max-w-sm shrink-0 text-body text-stone md:pb-3">
+          <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             A small dining room in Kilimani, cooking what the season gives us and giving every table time.
           </p>
         </div>

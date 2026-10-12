@@ -26,7 +26,7 @@ function ExperienceRow({ experience, index }: { experience: DiningExperience; in
       <div className={cn('lg:col-span-6', reversed ? 'lg:order-1' : 'lg:order-2')}>
         <p className="label-caps mb-4 text-champagne">Experience {String(index + 1).padStart(2, '0')}</p>
         <h2 className="text-section max-w-xl">{experience.name}</h2>
-        <p className="mt-5 max-w-xl text-body text-stone">{experience.description}</p>
+        <p className="mt-5 max-w-xl text-lead text-stone">{experience.description}</p>
 
         {experience.highlights.length > 0 && (
           <ul className="mt-6 max-w-xl space-y-2.5">
@@ -102,7 +102,7 @@ export default function ExperiencesPage() {
             <br />
             made for the occasion<span className="text-champagne">.</span>
           </h1>
-          <p className="max-w-sm shrink-0 text-body text-stone md:pb-3">
+          <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             Private tastings, long-table suppers and chef&apos;s counters — each one bookable, each one a little
             different.
           </p>

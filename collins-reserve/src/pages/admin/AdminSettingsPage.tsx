@@ -224,11 +224,11 @@ export default function AdminSettingsPage() {
           <div className="mt-5 grid gap-4 border-b border-line pb-5 sm:grid-cols-2">
             <div>
               <p className="label-caps text-stone">Name</p>
-              <p className="mt-2 font-display text-2xl font-light text-ink">{restaurant?.name ?? '—'}</p>
+              <p className="mt-2 font-display text-2xl font-semibold text-ink">{restaurant?.name ?? '—'}</p>
             </div>
             <div>
               <p className="label-caps text-stone">Wordmark</p>
-              <p className="mt-2 font-display text-2xl font-light uppercase tracking-[0.24em] text-ink">
+              <p className="mt-2 font-display text-2xl font-semibold uppercase tracking-[0.24em] text-ink">
                 {restaurant?.wordmark ?? '—'}
               </p>
             </div>

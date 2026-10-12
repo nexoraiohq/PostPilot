@@ -72,7 +72,7 @@ export default function ContactPage() {
             <br />
             find us<span className="text-champagne">.</span>
           </h1>
-          <p className="max-w-sm shrink-0 text-body text-stone md:pb-3">
+          <p className="max-w-sm shrink-0 text-support text-stone md:pb-3">
             Address, hours and the fastest ways to reach the team — or send a message and we will come back to you.
           </p>
         </div>

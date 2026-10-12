@@ -183,7 +183,7 @@ export default function MenuPage() {
             <h1 className="text-page">
               Menu<span className="text-champagne">.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-body text-stone">
+            <p className="mt-5 max-w-xl text-lead text-stone">
               Written weekly from the market and cooked over charcoal and fire. Add dishes to your order for pickup or
               delivery, or reserve a table and let the kitchen lead.
             </p>

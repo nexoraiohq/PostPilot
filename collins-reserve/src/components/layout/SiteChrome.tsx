@@ -181,7 +181,7 @@ export function SiteHeader() {
                 end={item.to === '/'}
                 className={({ isActive }) =>
                   cn(
-                    'font-display py-3 text-5xl font-light tracking-tight transition-colors',
+                    'font-display py-3 text-5xl font-semibold tracking-tight transition-colors',
                     isActive ? 'text-champagne' : 'text-ivory/90 hover:text-ivory',
                   )
                 }

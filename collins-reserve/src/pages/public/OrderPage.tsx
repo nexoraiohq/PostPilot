@@ -212,7 +212,7 @@ export default function OrderPage() {
       <h1 className="text-page">
         Your order<span className="text-champagne">.</span>
       </h1>
-      <p className="mt-5 max-w-xl text-body text-stone">
+      <p className="mt-5 max-w-xl text-lead text-stone">
         Choose pickup or delivery, tell us where to send it, and we will take it straight to the kitchen. Payment is
         collected on pickup or delivery.
       </p>

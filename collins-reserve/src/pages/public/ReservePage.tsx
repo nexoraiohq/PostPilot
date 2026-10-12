@@ -227,7 +227,7 @@ export default function ReservePage() {
           <h1 className="text-page">
             Reserve a table<span className="text-champagne">.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-body text-stone">
+          <p className="mt-5 max-w-xl text-lead text-stone">
             Three short steps: your party and date, a seating time, then a few details. Every request is reviewed by our
             team before it becomes a booking.
           </p>
