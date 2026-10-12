@@ -1,8 +1,10 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Clock, Search, TriangleAlert, X } from 'lucide-react'
+import { Clock, Plus, Search, TriangleAlert, X } from 'lucide-react'
 import { useMenuData, useRestaurantData } from '@/hooks/data'
 import { useCart } from '@/context/cart'
+import { useToast } from '@/context/toast'
+import { MAX_ORDER_LINES } from '@/services/orders.service'
 import { DIETARY_LABELS, type MenuItem, type RestaurantSettings } from '@/types'
 import { formatKes } from '@/utils/format'
 import { cn } from '@/utils/cn'
@@ -10,7 +12,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Button, LinkButton } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Field'
 import { EmptyState, Skeleton } from '@/components/ui/States'
-import { DishDetailModal } from '@/components/menu/DishDetailModal'
+import { flyToCart } from '@/components/menu/flyToCart'
 
 function serviceDaysLabel(settings: RestaurantSettings | null): string | null {
   if (!settings) return null
@@ -24,12 +26,43 @@ function serviceDaysLabel(settings: RestaurantSettings | null): string | null {
   return closed.length > 0 ? `${head} · closed ${closed.map((h) => h.label.slice(0, 3)).join(', ')}` : head
 }
 
-function DishCard({ item, onOpen }: { item: MenuItem; onOpen: (id: string) => void }) {
+type AddSource = (item: MenuItem, sourceImg: HTMLImageElement | null) => void
+
+function AddToCartButton({
+  item,
+  onClick,
+  className,
+}: {
+  item: MenuItem
+  onClick: () => void
+  className?: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={!item.available}
+      aria-label={item.available ? `Add ${item.name} to order` : `${item.name} is sold out`}
+      className={cn(
+        'flex size-10 shrink-0 items-center justify-center rounded-full bg-ink text-ivory shadow-[0_2px_10px_rgba(23,23,21,0.2)]',
+        'transition-all duration-200 ease-out hover:scale-105 hover:bg-ink-soft active:scale-95',
+        'disabled:pointer-events-none disabled:opacity-30',
+        className,
+      )}
+    >
+      <Plus className="size-[18px]" aria-hidden />
+    </button>
+  )
+}
+
+function DishCard({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
+  const imgRef = useRef<HTMLImageElement>(null)
   return (
     <li>
-      <button type="button" onClick={() => onOpen(item.id)} className="group block w-full text-left">
+      <article className="group">
         <div className="relative overflow-hidden rounded-2xl bg-line/40">
           <img
+            ref={imgRef}
             src={item.imageUrl}
             alt={item.name}
             loading="lazy"
@@ -50,7 +83,10 @@ function DishCard({ item, onOpen }: { item: MenuItem; onOpen: (id: string) => vo
           <h3 className="text-card transition-colors group-hover:text-stone">{item.name}</h3>
           <span className="whitespace-nowrap text-[15px] font-medium tabular-nums">{formatKes(item.priceKes)}</span>
         </div>
-        <p className="mt-1.5 text-support text-stone line-clamp-2">{item.description}</p>
+        <div className="mt-1.5 flex items-start justify-between gap-3">
+          <p className="text-support text-stone line-clamp-2">{item.description}</p>
+          <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} className="-mt-1" />
+        </div>
         {item.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {item.tags.map((tag) => (
@@ -60,17 +96,19 @@ function DishCard({ item, onOpen }: { item: MenuItem; onOpen: (id: string) => vo
             ))}
           </div>
         )}
-      </button>
+      </article>
     </li>
   )
 }
 
-function DishRow({ item, onOpen }: { item: MenuItem; onOpen: (id: string) => void }) {
+function DishRow({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
+  const imgRef = useRef<HTMLImageElement>(null)
   return (
     <li>
-      <button type="button" onClick={() => onOpen(item.id)} className="flex w-full items-start gap-4 py-4 text-left">
+      <div className="flex items-start gap-4 py-4">
         <div className="size-20 shrink-0 overflow-hidden rounded-xl bg-line/40">
           <img
+            ref={imgRef}
             src={item.imageUrl}
             alt=""
             loading="lazy"
@@ -94,15 +132,17 @@ function DishRow({ item, onOpen }: { item: MenuItem; onOpen: (id: string) => voi
             ))}
           </div>
         </div>
-      </button>
+        <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} className="mt-1" />
+      </div>
     </li>
   )
 }
 
 export default function MenuPage() {
-  const { categories, items, loading, error: dataError, itemById } = useMenuData()
+  const { categories, items, loading, error: dataError } = useMenuData()
   const { settings } = useRestaurantData()
-  const { itemCount, subtotalKes } = useCart()
+  const { itemCount, subtotalKes, lines, addLine } = useCart()
+  const { toast } = useToast()
   const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [dismissedError, setDismissedError] = useState<Error | null>(null)
@@ -136,9 +176,6 @@ export default function MenuPage() {
     return category ? items.filter((item) => item.categoryId === category.id) : items
   }, [items, term, activeSlug, categoryBySlug])
 
-  const dishId = searchParams.get('dish')
-  const dish = dishId ? itemById(dishId) : undefined
-
   function updateParams(mutate: (next: URLSearchParams) => void) {
     setSearchParams(
       (prev) => {
@@ -158,12 +195,18 @@ export default function MenuPage() {
     })
   }
 
-  function openDish(id: string) {
-    updateParams((next) => next.set('dish', id))
-  }
-
-  function closeDish() {
-    updateParams((next) => next.delete('dish'))
+  /* Quick add from the card: first variant, no add-ons, one piece, plus the
+     fly-to-cart animation. Mirrors the old detail dialog's safety checks. */
+  function handleAddToCart(item: MenuItem, sourceImg: HTMLImageElement | null) {
+    if (!item.available) return
+    const alreadyInOrder = lines.some((l) => l.itemId === item.id)
+    if (!alreadyInOrder && lines.length >= MAX_ORDER_LINES) {
+      toast(`An order can hold at most ${MAX_ORDER_LINES} different dishes.`, 'error')
+      return
+    }
+    addLine(item, { quantity: 1, variant: item.variants[0] ?? null, addons: [] })
+    toast(`${item.name} added to your order`, 'success')
+    flyToCart(sourceImg)
   }
 
   const daysLabel = serviceDaysLabel(settings)
@@ -305,12 +348,12 @@ export default function MenuPage() {
           <>
             <ul className="hidden gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3">
               {visibleItems.map((item) => (
-                <DishCard key={item.id} item={item} onOpen={openDish} />
+                <DishCard key={item.id} item={item} onAdd={handleAddToCart} />
               ))}
             </ul>
             <ul className="divide-y divide-line border-t border-line sm:hidden">
               {visibleItems.map((item) => (
-                <DishRow key={item.id} item={item} onOpen={openDish} />
+                <DishRow key={item.id} item={item} onAdd={handleAddToCart} />
               ))}
             </ul>
           </>
@@ -341,8 +384,6 @@ export default function MenuPage() {
           </div>
         </div>
       )}
-
-      <DishDetailModal item={dish ?? null} onClose={closeDish} />
     </>
   )
 }

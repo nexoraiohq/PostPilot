@@ -191,16 +191,13 @@ async function main() {
     })
 
     // ---------------- Menu → cart → checkout ----------------
-    await test('menu: open a dish and add it to the order', async () => {
+    await test('menu: quick-add from a card updates the cart', async () => {
       const page = await customerCtx.newPage()
       watch(page, 'customer')
       await page.goto(`${BASE}/menu`, { waitUntil: 'domcontentloaded' })
       await page.locator('main li h3').first().waitFor({ timeout: 15000 })
-      await page.locator('main li > button').first().click()
-      const dialog = page.getByRole('dialog').first()
-      await dialog.waitFor({ timeout: 10000 })
-      await dialog.getByRole('button', { name: 'Add to order' }).click()
-      await dialog.waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {})
+      await page.locator('main li button[aria-label^="Add "]:not([disabled])').first().click()
+      await page.getByRole('button', { name: /Open cart, [1-9]/ }).waitFor({ timeout: 10000 })
       await page.close()
     })
 

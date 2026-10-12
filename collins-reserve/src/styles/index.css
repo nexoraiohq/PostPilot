@@ -227,6 +227,26 @@
   animation: announce-marquee 38s linear infinite;
 }
 
+/* Header cart pulse after the fly-to-cart animation lands */
+@keyframes cart-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.28);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@utility animate-cart-bump {
+  animation: cart-bump 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
 

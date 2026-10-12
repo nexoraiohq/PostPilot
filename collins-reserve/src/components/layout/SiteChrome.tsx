@@ -122,6 +122,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               type="button"
+              data-cart-target
               onClick={openCart}
               className="relative rounded-full p-2.5 text-ink transition-colors hover:bg-ink/5"
               aria-label={`Open cart, ${itemCount} items`}

@@ -58,31 +58,27 @@ export default function HomePage() {
     <>
       {/* 01 — Hero */}
       <section aria-label="Introduction" className="editorial-width pt-12 md:pt-16 lg:pt-20">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="label-caps mb-6 text-stone">
-              Nairobi · Kenya
-              <span className="mx-3 text-champagne">·</span>
-              Est. 2026
-            </p>
-            <h1 className="text-hero max-w-4xl">
-              A slower kind
-              <br />
-              of dining<span className="text-champagne">.</span>
-            </h1>
-          </div>
-          <div className="max-w-sm shrink-0 md:pb-3">
-            <p className="text-lead text-stone">
-              {restaurant?.positioning ??
-                'Seasonal ingredients. Thoughtful cooking. An evening worth remembering.'}
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <LinkButton to="/reserve" size="lg">Reserve a Table</LinkButton>
-              <LinkButton to="/menu" variant="secondary" size="lg">
-                Explore the Menu
-                <ArrowUpRight className="size-4" aria-hidden />
-              </LinkButton>
-            </div>
+        <p className="label-caps mb-6 text-stone">
+          Nairobi · Kenya
+          <span className="mx-3 text-champagne">·</span>
+          Est. 2026
+        </p>
+        <h1 className="text-hero">
+          A slower kind
+          <br />
+          of dining<span className="text-champagne">.</span>
+        </h1>
+        <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
+          <p className="max-w-2xl text-lead text-stone">
+            {restaurant?.positioning ??
+              'Seasonal ingredients. Thoughtful cooking. An evening worth remembering.'}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 md:shrink-0">
+            <LinkButton to="/reserve" size="lg">Reserve a Table</LinkButton>
+            <LinkButton to="/menu" variant="secondary" size="lg">
+              Explore the Menu
+              <ArrowUpRight className="size-4" aria-hidden />
+            </LinkButton>
           </div>
         </div>
 
@@ -140,7 +136,7 @@ export default function HomePage() {
           <ul className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 no-scrollbar sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
             {signatures.map((dish) => (
               <li key={dish.id} className="w-[78vw] shrink-0 snap-start sm:w-auto">
-                <Link to={`/menu?dish=${dish.id}`} className="group block">
+                <Link to="/menu" className="group block">
                   <div className="relative overflow-hidden rounded-2xl bg-line/40">
                     <img
                       src={dish.imageUrl}
