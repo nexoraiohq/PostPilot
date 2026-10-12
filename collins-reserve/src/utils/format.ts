@@ -18,7 +18,7 @@ export function formatDateShort(value: string | number | Date): string {
 
 export function formatTime12h(time: string): string {
   const [h, m] = time.split(':').map(Number)
-  if (Number.isNaN(h) || Number.isNaN(m)) return time
+  if (!Number.isFinite(h) || !Number.isFinite(m)) return time
   const suffix = h >= 12 ? 'PM' : 'AM'
   const hour = h % 12 || 12
   return `${hour}:${String(m).padStart(2, '0')} ${suffix}`

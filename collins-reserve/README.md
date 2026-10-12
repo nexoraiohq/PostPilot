@@ -4,8 +4,8 @@ A complete, deployable premium restaurant platform demo: a public fine-dining si
 
 **MAISON NOIR is a fictional restaurant.** Every order, reservation and figure in the app is demo data. No payment is ever processed (checkout is `pay on collection` only).
 
-> **Live demo** — *(deployed to Firebase Hosting, see [Deploy](#deploy))*
-> Admin dashboard: `/admin/login` — credentials below.
+> **Live demo — https://collins-reserve-demo-42b6.web.app**
+> Admin dashboard: https://collins-reserve-demo-42b6.web.app/admin/login — credentials below.
 
 ---
 
@@ -67,6 +67,7 @@ The repo ships with `firestore.rules`, `firestore.indexes.json` and `firebase.js
 | `npm run dev` | Vite dev server |
 | `npm run build` | Type-check (`tsc -b`) + production build to `dist/` |
 | `npm run lint` | oxlint (0 errors, 0 warnings is the baseline) |
+| `npm test` | Vitest unit tests: order totals incl. **service-charge rounding parity with the rules**, status transition table, reference formats, date/time formatters |
 | `npm run seed` | Idempotent demo seed: restaurant, settings, 5 categories, 19 dishes, experiences, 13 tables, sample orders/reservations, staff account |
 | `npm run verify:rules` | **Live Security Rules suite** — signs in a real non-staff customer via Identity Toolkit, then asserts the deployed rules: tampered totals rejected, valid order accepted (service-charge rounding parity), public tracking reads, staff transitions, reservation validation, slot capacity lock. Cleans up after itself. |
 | `npm run smoke` | **End-to-end browser smoke** (Playwright against the dev server): all public routes, menu → cart → checkout, order placed → live tracking, staff sign-in + queue accept verified live on the customer page, full reservation flow, zero page errors. Cleans up its orders/reservations/slots. |
@@ -128,5 +129,6 @@ Hosting serves `dist/` with an SPA rewrite and immutable asset caching (`firebas
 ## Verification status
 
 - `npm run lint` / `tsc -b` / `npm run build` — clean
+- `npm test` — 23/23 unit tests
 - `npm run verify:rules` — 11/11 against the **deployed** rules
 - `npm run smoke` — 12/12 end-to-end (routes, cart, checkout, realtime tracking, staff accept, reservations, zero page errors)
