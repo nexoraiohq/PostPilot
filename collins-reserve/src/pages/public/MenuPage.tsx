@@ -44,13 +44,15 @@ function AddToCartButton({
       disabled={!item.available}
       aria-label={item.available ? `Add ${item.name} to order` : `${item.name} is sold out`}
       className={cn(
-        'flex size-10 shrink-0 items-center justify-center rounded-full bg-ink text-ivory shadow-[0_2px_10px_rgba(23,23,21,0.2)]',
-        'transition-all duration-200 ease-out hover:scale-105 hover:bg-ink-soft active:scale-95',
+        'flex size-11 shrink-0 items-center justify-center rounded-full bg-ink text-ivory',
+        'shadow-[0_1px_2px_rgba(23,23,21,0.18),0_0_0_1px_rgba(23,23,21,0.07)]',
+        'transition-all duration-200 ease-out hover:scale-105 hover:bg-ink-soft',
+        'hover:shadow-[0_4px_14px_rgba(23,23,21,0.26),0_0_0_1px_rgba(23,23,21,0.10)] active:scale-95',
         'disabled:pointer-events-none disabled:opacity-30',
         className,
       )}
     >
-      <Plus className="size-[18px]" aria-hidden />
+      <Plus className="size-5" aria-hidden />
     </button>
   )
 }
@@ -83,9 +85,9 @@ function DishCard({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
           <h3 className="text-card transition-colors group-hover:text-stone">{item.name}</h3>
           <span className="whitespace-nowrap text-[15px] font-medium tabular-nums">{formatKes(item.priceKes)}</span>
         </div>
-        <div className="mt-1.5 flex items-start justify-between gap-3">
+        <div className="mt-1.5 flex items-center justify-between gap-3">
           <p className="text-support text-stone line-clamp-2">{item.description}</p>
-          <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} className="-mt-1" />
+          <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} />
         </div>
         {item.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
@@ -132,7 +134,7 @@ function DishRow({ item, onAdd }: { item: MenuItem; onAdd: AddSource }) {
             ))}
           </div>
         </div>
-        <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} className="mt-1" />
+        <AddToCartButton item={item} onClick={() => onAdd(item, imgRef.current)} className="self-center" />
       </div>
     </li>
   )
