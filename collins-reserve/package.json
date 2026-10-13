@@ -1,44 +1,32 @@
 {
-  "name": "collins-reserve",
+  "name": "postpilot",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "test": "vitest run",
     "preview": "vite preview",
-    "seed": "node scripts/seed.mjs",
-    "verify:rules": "node scripts/verify-rules.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "deploy": "firebase deploy --only functions,firestore:rules,firestore:indexes,hosting --project collins-reserve-demo-42b6 --non-interactive"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.9.1",
     "@tailwindcss/vite": "^4.3.3",
     "clsx": "^2.1.1",
-    "date-fns": "^4.4.0",
-    "firebase": "^13.0.0",
     "lucide-react": "^1.55.0",
+    "qrcode": "^1.5.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-hook-form": "^7.90.0",
-    "react-router-dom": "^7.18.4",
-    "recharts": "^3.10.1",
     "tailwind-merge": "^3.7.0",
-    "tailwindcss": "^4.3.3",
-    "zod": "^4.6.6"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
+    "@types/qrcode": "^1.5.5",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
-    "firebase-admin": "^14.5.0",
     "oxlint": "^1.81.0",
-    "playwright-core": "^1.64.0",
     "typescript": "~6.0.2",
-    "vite": "^8.3.0",
-    "vitest": "^5.0.4"
+    "vite": "^8.3.0"
   }
 }

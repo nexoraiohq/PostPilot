@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#171715"/>
-  <text x="32" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#C8AD83" text-anchor="middle" letter-spacing="1">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PostPilot">
+  <rect width="64" height="64" rx="15" fill="#12121a"/>
+  <g stroke="#6366f1" stroke-width="4" stroke-linecap="round" opacity="0.5" fill="none">
+    <path d="M5 45 13 37"/>
+    <path d="M11 55 19 47"/>
+  </g>
+  <path d="M57 9 30.5 35.5 9 26Z" fill="#818cf8"/>
+  <path d="M57 9 40 57 30.5 35.5Z" fill="#6366f1"/>
 </svg>

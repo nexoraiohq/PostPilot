@@ -7,34 +7,9 @@
   },
   "overrides": [
     {
-      "files": ["src/app/router.tsx"],
+      "files": ["src/context/*.tsx"],
       "rules": {
         "react/only-export-components": "off"
-      }
-    },
-    {
-      "files": ["src/hooks/data.tsx", "src/context/*.tsx"],
-      "rules": {
-        "react/only-export-components": "off"
-      }
-    },
-    {
-      "files": ["src/components/ui/*.tsx", "src/pages/admin/_adminui.tsx"],
-      "rules": {
-        "react/only-export-components": [
-          "warn",
-          {
-            "allowConstantExport": true,
-            "allowExportNames": [
-              "buttonStyles",
-              "tableClasses",
-              "ORDER_ACTIONS",
-              "isOrderClosed",
-              "quickOrderActions",
-              "errorMessage"
-            ]
-          }
-        ]
       }
     }
   ]
