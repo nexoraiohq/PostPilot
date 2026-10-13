@@ -56,7 +56,7 @@ const TIKTOK_VIDEO_INIT = 'https://open.tiktokapis.com/v2/post/publish/video/ini
 const TIKTOK_PHOTO_INIT = 'https://open.tiktokapis.com/v2/post/publish/photo/init/'
 const TIKTOK_STATUS = 'https://open.tiktokapis.com/v2/post/publish/status/fetch/'
 const TIKTOK_USER_INFO = 'https://open.tiktokapis.com/v2/user/info/'
-const TIKTOK_SCOPES = 'user.info.basic video.upload video.publish'
+const TIKTOK_SCOPES = 'user.info.basic,video.upload,video.publish'
 const PRIVACY_LEVELS = [
   'SELF_ONLY',
   'MUTUAL_FOLLOW_FRIENDS',
@@ -154,7 +154,7 @@ async function refreshAccessToken(settings: TikTokSettings): Promise<string> {
   if (!settings.refreshToken) throw new Error('tiktok_not_connected')
 
   const body = new URLSearchParams({
-    client_id: settings.clientKey,
+    client_key: settings.clientKey,
     client_secret: settings.clientSecret,
     grant_type: 'refresh_token',
     refresh_token: settings.refreshToken,
@@ -644,7 +644,7 @@ router.get(
     const state = randomBytes(16).toString('hex')
     await saveSettings({ oauthState: state, oauthStateExpiresAt: new Date(Date.now() + 10 * 60_000).toISOString() })
     const url = new URL(TIKTOK_AUTH_URL)
-    url.searchParams.set('client_id', s.clientKey)
+    url.searchParams.set('client_key', s.clientKey)
     url.searchParams.set('scope', TIKTOK_SCOPES)
     url.searchParams.set('response_type', 'code')
     url.searchParams.set('redirect_uri', REDIRECT_URI)
@@ -664,7 +664,7 @@ router.get(
       return res.redirect(`${DASHBOARD_URL}/?tiktok=error&reason=bad_state`)
     }
     const body = new URLSearchParams({
-      client_id: s.clientKey,
+      client_key: s.clientKey,
       client_secret: s.clientSecret,
       code,
       grant_type: 'authorization_code',
