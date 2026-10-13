@@ -12,6 +12,15 @@
         { "source": "/item/:id", "destination": "/index.html" },
         { "source": "/share/:id", "destination": "/index.html" }
       ]
+    },
+    "postpilot-api": {
+      "root": "collins-reserve/functions",
+      "framework": "express",
+      "entrypoint": "lib/server.js",
+      "buildCommand": "npm run build",
+      "functions": {
+        "**/*.js": { "maxDuration": 60 }
+      }
     }
   },
   "headers": [
@@ -23,7 +32,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://us-central1-collins-reserve-demo-42b6.cloudfunctions.net/api/:path*"
+      "destination": { "service": "postpilot-api" }
     },
     { "source": "/(.*)", "destination": { "service": "collins-reserve" } }
   ]
