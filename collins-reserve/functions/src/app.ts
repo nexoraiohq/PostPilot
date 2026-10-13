@@ -2,6 +2,9 @@ import admin from 'firebase-admin'
 import express from 'express'
 import type { Request, Response } from 'express'
 import { randomBytes } from 'node:crypto'
+import { writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 
 const logger = {
   error: (...args: unknown[]) => console.error(...args),
@@ -9,23 +12,36 @@ const logger = {
   info: (...args: unknown[]) => console.info(...args),
 }
 
+const PROJECT_ID =
+  process.env.GOOGLE_CLOUD_PROJECT ||
+  process.env.FIREBASE_PROJECT ||
+  (process.env.FIREBASE_STORAGE_BUCKET ?? '').replace(/\.appspot\.com$/, '') ||
+  'collins-reserve-demo-42b6'
+
 if (admin.apps.length === 0) {
   const rt = process.env.FIREBASE_REFRESH_TOKEN
   if (rt) {
-    admin.initializeApp({
-      credential: admin.credential.refreshToken({
+    const adcPath = join(tmpdir(), 'postpilot-google-adc.json')
+    writeFileSync(
+      adcPath,
+      JSON.stringify({
         type: 'authorized_user',
         client_id: process.env.FIREBASE_CLIENT_ID ?? '',
         client_secret: process.env.FIREBASE_CLIENT_SECRET ?? '',
         refresh_token: rt,
       }),
-      ...(process.env.FIREBASE_STORAGE_BUCKET
-        ? { storageBucket: process.env.FIREBASE_STORAGE_BUCKET }
-        : {}),
-    })
-  } else {
-    admin.initializeApp()
+      { mode: 0o600 },
+    )
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = adcPath
   }
+  logger.info('firebase-init', { hasRefreshToken: !!rt, projectId: PROJECT_ID })
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    projectId: PROJECT_ID,
+    ...(process.env.FIREBASE_STORAGE_BUCKET
+      ? { storageBucket: process.env.FIREBASE_STORAGE_BUCKET }
+      : {}),
+  })
 }
 const db = admin.firestore()
 
