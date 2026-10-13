@@ -16,10 +16,10 @@
     "postpilot-api": {
       "root": "collins-reserve/functions",
       "framework": "express",
-      "entrypoint": "lib/server.js",
+      "entrypoint": "src/server.ts",
       "buildCommand": "npm run build",
       "functions": {
-        "**/*.js": { "maxDuration": 60 }
+        "src/server.ts": { "maxDuration": 60 }
       }
     }
   },
