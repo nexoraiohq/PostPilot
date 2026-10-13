@@ -30,7 +30,6 @@ function parseRoute(): Route {
 function initRoute(): Route {
   const params = new URLSearchParams(window.location.search)
   if (params.get('tiktok')) {
-    window.history.replaceState({}, '', window.location.pathname)
     return { name: 'settings' }
   }
   return parseRoute()
@@ -58,6 +57,12 @@ export function App() {
     const onPop = () => setRoute(parseRoute())
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('tiktok')) {
+      window.history.replaceState({}, '', window.location.pathname)
+    }
   }, [])
 
   if (route.name === 'share') {
