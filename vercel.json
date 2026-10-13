@@ -3,12 +3,28 @@
   "services": {
     "collins-reserve": {
       "root": "collins-reserve",
-      "framework": "vite"
-    },
-    "functions": {
-      "root": "collins-reserve/functions",
-      "framework": "express"
+      "framework": "vite",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist",
+      "rewrites": [
+        { "source": "/settings", "destination": "/index.html" },
+        { "source": "/new", "destination": "/index.html" },
+        { "source": "/item/:id", "destination": "/index.html" },
+        { "source": "/share/:id", "destination": "/index.html" }
+      ]
     }
   },
-  "rewrites": []
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [{ "key": "x-vercel-enable-rewrite-caching", "value": "0" }]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://us-central1-collins-reserve-demo-42b6.cloudfunctions.net/api/:path*"
+    },
+    { "source": "/(.*)", "destination": { "service": "collins-reserve" } }
+  ]
 }
