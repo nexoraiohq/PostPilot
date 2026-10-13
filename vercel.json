@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "collins-reserve": {
+      "root": "collins-reserve",
+      "framework": "vite"
+    },
+    "functions": {
+      "root": "collins-reserve/functions",
+      "framework": "express"
+    }
+  },
+  "rewrites": []
+}
